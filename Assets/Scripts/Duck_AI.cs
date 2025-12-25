@@ -28,6 +28,9 @@ public class Duck_AI : MonoBehaviour
     private float _minHidingTime, _maxHidingTime;
     [SerializeField]
     private bool _isMakingFinalDash = false;
+
+    [SerializeField]
+    private Vector3 _targetedPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +45,7 @@ public class Duck_AI : MonoBehaviour
             _agent.SetDestination(_finalWaypoint.position);
             _isMakingFinalDash = true;
         }
+        _targetedPosition = _selectedWaypoints[_currentWaypoint].position; //
     }
 
     private void RandomizeWaypoints()
@@ -63,7 +67,7 @@ public class Duck_AI : MonoBehaviour
         switch (_currentState)
         {
             case State.Running:
-                if (HasReachedDestination(_agent))
+                if (transform.position == _targetedPosition)
                 {
                     if (_isMakingFinalDash)
                     {
@@ -97,6 +101,7 @@ public class Duck_AI : MonoBehaviour
             _agent.SetDestination(_finalWaypoint.position);
             _isMakingFinalDash = true;
         }
+        _targetedPosition = _selectedWaypoints[_currentWaypoint].position; //
         _currentState = State.Hiding;
     }
 
