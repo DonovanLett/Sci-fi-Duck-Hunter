@@ -130,6 +130,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 416925987}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: FF_Waypoint_5
@@ -2377,6 +2381,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 416925987}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: FF_Waypoint_1
@@ -4636,6 +4644,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1346598597}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: SF_Waypoint_2
@@ -6352,6 +6364,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2091899282}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: TF_Waypoint_4
@@ -7925,6 +7941,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1346598597}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: SF_Waypoint_5
@@ -8351,6 +8371,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2091899282}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: TF_Waypoint_1
@@ -14741,6 +14765,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1346598597}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: SF_Waypoint_4
@@ -14802,6 +14830,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1346598597}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: SF_Waypoint_6
@@ -18611,6 +18643,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 416925987}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: FF_Waypoint_3
@@ -19279,6 +19315,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 416925987}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: FF_Waypoint_4
@@ -21415,6 +21455,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 416925987}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: FF_Waypoint_2
@@ -26685,6 +26729,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 416925987}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: FF_Waypoint_6
@@ -34672,6 +34720,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2091899282}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: TF_Waypoint_5
@@ -35432,6 +35484,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2091899282}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: TF_Waypoint_2
@@ -36058,6 +36114,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2091899282}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: TF_Waypoint_3
@@ -37661,6 +37721,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 999384274}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isFinalWaypoint
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: Final_Waypoint
@@ -39288,6 +39352,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1346598597}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: SF_Waypoint_3
@@ -46610,6 +46678,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1346598597}
     m_Modifications:
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _isOccupied
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: SF_Waypoint_1

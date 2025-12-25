@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Waypoint : MonoBehaviour
-{
-    // Waypoint Script
+{ 
     [SerializeField]
     private bool _isFinalWaypoint = false;
 
+    [SerializeField] // Unserialize after experimentation
     private bool _isOccupied = false;
 
     public bool IsOccupied()

@@ -9,6 +9,7 @@ public class Duck_AI : MonoBehaviour
     {
         Running,
         Hiding,
+        Waiting, // Occupy Code
         Dead,
     }
     [SerializeField]
@@ -27,6 +28,10 @@ public class Duck_AI : MonoBehaviour
     [SerializeField]
     private float _minHidingTime, _maxHidingTime;
     [SerializeField]
+    private bool _isHesitating = false; // Occupy Code
+    [SerializeField]
+    private float _minHesitatingTime, _maxHesitatingTime; // Occupy Code
+    [SerializeField]
     private bool _isMakingFinalDash = false;
 
     [SerializeField]
@@ -38,14 +43,16 @@ public class Duck_AI : MonoBehaviour
         RandomizeWaypoints();
         if (_selectedWaypoints.Count > 1)
         {
-            _agent.SetDestination(_selectedWaypoints[_currentWaypoint].transform.position);
+            SelectFirstWaypoint(); // Occupy Code
+           // _agent.SetDestination(_selectedWaypoints[_currentWaypoint].transform.position); // Original before Occupy Code
         }
         else
         {
             _agent.SetDestination(_finalWaypoint.transform.position);
             _isMakingFinalDash = true;
         }
-        _targetedPosition = _selectedWaypoints[_currentWaypoint].transform.position; //
+        _targetedPosition = _selectedWaypoints[_currentWaypoint].transform.position;
+        _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy Code
     }
 
     private void RandomizeWaypoints()
@@ -59,6 +66,27 @@ public class Duck_AI : MonoBehaviour
             }
         }
         _selectedWaypoints.Add(_finalWaypoint);
+    }
+
+    private void SelectFirstWaypoint() // Occupy Code
+    {
+        foreach (Waypoint waypoint in _selectedWaypoints) // Maybe update this to a for loop later, just for extra accuracy 
+        {
+            if (waypoint.IsOccupied() == false)
+            { 
+                waypoint.SetToOccupied();
+                _agent.SetDestination(waypoint.transform.position);
+                if(waypoint == _finalWaypoint) // MAKE SURE THIS ACTUALLY WORKS LATER
+                {
+                    _isMakingFinalDash = true;
+                }
+                return;
+            }
+            else
+            {
+                _currentWaypoint++;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -84,6 +112,16 @@ public class Duck_AI : MonoBehaviour
                 {
                     StartCoroutine(HidingRoutine());
                     _isHiding = true;
+                }
+                break;
+            case State.Waiting: // Occupy Code
+                if (_isHesitating == false)
+                {
+                    if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false)
+                    {
+                        StartCoroutine(HesitationTimer());
+                        _isHesitating = true;
+                    }
                 }
                 break;
         }
@@ -113,19 +151,37 @@ public class Duck_AI : MonoBehaviour
                agent.velocity.sqrMagnitude < 0.01f; // Confirms the agent has fully stopped
     }
 
-  /*  bool HasReachedDestination(NavMeshAgent agent)
-    {
-        return agent.remainingDistance <= agent.stoppingDistance;
-    } */
-
     IEnumerator HidingRoutine()
     {
         _agent.isStopped = true;
         float _hidingTime = ((Random.value * (_maxHidingTime - _minHidingTime)) + _minHidingTime);
         yield return new WaitForSeconds(_hidingTime);
-        _currentState = State.Running;
         _isHiding = false;
-        _agent.isStopped = false;
+        if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false) // Occupy Code
+        { // Occupy Code
+            _currentState = State.Running;
+            _agent.isStopped = false;
+            _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied(); // Occupy code
+            _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy code
+        } // Occupy Code
+        else // Occupy Code
+        { // Occupy Code
+            _currentState = State.Waiting; // Occupy Code
+        } // Occupy Code
+    }
+
+    IEnumerator HesitationTimer() // Occupy Code
+    {
+        float _hesitationTime = ((Random.value * (_maxHesitatingTime - _minHesitatingTime)) + _minHesitatingTime);
+        yield return new WaitForSeconds(_hesitationTime);
+        if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false)
+        {
+            _currentState = State.Running;
+            _agent.isStopped = false;
+            _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied();
+            _selectedWaypoints[_currentWaypoint].SetToOccupied();
+        }
+        _isHesitating = false; // Maybe put this in an "else" statement
     }
 
 
@@ -135,6 +191,7 @@ public class Duck_AI : MonoBehaviour
         _agent.isStopped = true;
         _isHiding = false;
         _currentState = State.Dead;
+        // Figure Out What to Do here in terms of Occupation
         // Trigger Death Animation
     }
 

@@ -120,6 +120,9 @@ MonoBehaviour:
   _isHiding: 0
   _minHidingTime: 0.62
   _maxHidingTime: 3.59
+  _isHesitating: 0
+  _minHesitatingTime: 0.36
+  _maxHesitatingTime: 0.91
   _isMakingFinalDash: 0
   _targetedPosition: {x: 0, y: 0, z: 0}
 --- !u!195 &2412930126167099331
