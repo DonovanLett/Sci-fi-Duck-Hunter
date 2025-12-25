@@ -15,11 +15,11 @@ public class Duck_AI : MonoBehaviour
     private State _currentState = State.Running;
     private NavMeshAgent _agent;
     [SerializeField]
-    private List<Transform> _columnWaypoints;
+    private List<Waypoint> _columnWaypoints;
     [SerializeField]
-    private Transform _finalWaypoint;
+    private Waypoint _finalWaypoint;
     [SerializeField]
-    private List<Transform> _selectedWaypoints;
+    private List<Waypoint> _selectedWaypoints;
     [SerializeField]
     private int _currentWaypoint = 0;
     [SerializeField]
@@ -38,19 +38,19 @@ public class Duck_AI : MonoBehaviour
         RandomizeWaypoints();
         if (_selectedWaypoints.Count > 1)
         {
-            _agent.SetDestination(_selectedWaypoints[_currentWaypoint].position);
+            _agent.SetDestination(_selectedWaypoints[_currentWaypoint].transform.position);
         }
         else
         {
-            _agent.SetDestination(_finalWaypoint.position);
+            _agent.SetDestination(_finalWaypoint.transform.position);
             _isMakingFinalDash = true;
         }
-        _targetedPosition = _selectedWaypoints[_currentWaypoint].position; //
+        _targetedPosition = _selectedWaypoints[_currentWaypoint].transform.position; //
     }
 
     private void RandomizeWaypoints()
     {
-        foreach (Transform point in _columnWaypoints)
+        foreach (Waypoint point in _columnWaypoints)
         {
             bool randomBool = Random.value < 0.5f;
             if (randomBool)
@@ -94,14 +94,14 @@ public class Duck_AI : MonoBehaviour
         _currentWaypoint++;
         if (_currentWaypoint < _selectedWaypoints.Count - 1) 
         {
-            _agent.SetDestination(_selectedWaypoints[_currentWaypoint].position);
+            _agent.SetDestination(_selectedWaypoints[_currentWaypoint].transform.position);
         }
         else
         {
-            _agent.SetDestination(_finalWaypoint.position);
+            _agent.SetDestination(_finalWaypoint.transform.position);
             _isMakingFinalDash = true;
         }
-        _targetedPosition = _selectedWaypoints[_currentWaypoint].position; //
+        _targetedPosition = _selectedWaypoints[_currentWaypoint].transform.position; //
         _currentState = State.Hiding;
     }
 
@@ -111,7 +111,7 @@ public class Duck_AI : MonoBehaviour
                 agent.hasPath && // Confirms a destination was actually set
                agent.remainingDistance <= agent.stoppingDistance && // Agent is close enough along the NavMesh path
                agent.velocity.sqrMagnitude < 0.01f; // Confirms the agent has fully stopped
-    } 
+    }
 
   /*  bool HasReachedDestination(NavMeshAgent agent)
     {
