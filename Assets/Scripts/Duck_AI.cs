@@ -12,17 +12,18 @@ public class Duck_AI : MonoBehaviour
         Waiting, // Occupy Code
         Dead,
     }
+
     [SerializeField]
     private State _currentState = State.Running;
     private NavMeshAgent _agent;
-    [SerializeField]
-    private List<Waypoint> _columnWaypoints;
     [SerializeField]
     private Waypoint _finalWaypoint;
     [SerializeField]
     private List<Waypoint> _selectedWaypoints;
     [SerializeField]
     private int _currentWaypoint = 0;
+    [SerializeField]
+    private int _designatedPriority;
     [SerializeField]
     private bool _isHiding = false;
     [SerializeField]
@@ -34,12 +35,14 @@ public class Duck_AI : MonoBehaviour
     [SerializeField]
     private bool _isMakingFinalDash = false;
 
+
     [SerializeField]
     private Vector3 _targetedPosition;
     // Start is called before the first frame update
     void Start()
     {
-        _agent = GetComponent<NavMeshAgent>();
+      /*  _agent = GetComponent<NavMeshAgent>();
+
         RandomizeWaypoints();
         if (_selectedWaypoints.Count > 1)
         {
@@ -52,12 +55,36 @@ public class Duck_AI : MonoBehaviour
             _isMakingFinalDash = true;
         }
         _targetedPosition = _selectedWaypoints[_currentWaypoint].transform.position;
+        _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy Code */
+    }
+
+    public void SetDuckPriority(int priority)
+    {
+        _designatedPriority = priority;
+        _agent.avoidancePriority = _designatedPriority;
+    }
+
+    public void DefineWaypoints(List<Waypoint> columnWaypoints, Waypoint finalWaypoint) // SpawnManager Code
+    {
+        _agent = GetComponent<NavMeshAgent>();
+        RandomizeWaypoints(columnWaypoints, finalWaypoint);
+        if (_selectedWaypoints.Count > 1)
+        {
+            SelectFirstWaypoint(); // Occupy Code
+            // _agent.SetDestination(_selectedWaypoints[_currentWaypoint].transform.position); // Original before Occupy Code
+        }
+        else
+        {
+            _agent.SetDestination(_finalWaypoint.transform.position);
+            _isMakingFinalDash = true;
+        }
+        _targetedPosition = _selectedWaypoints[_currentWaypoint].transform.position;
         _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy Code
     }
 
-    private void RandomizeWaypoints()
+    private void RandomizeWaypoints(List<Waypoint> columnWaypoints, Waypoint finalWaypoint)
     {
-        foreach (Waypoint point in _columnWaypoints)
+        foreach (Waypoint point in columnWaypoints)
         {
             bool randomBool = Random.value < 0.5f;
             if (randomBool)
@@ -65,6 +92,7 @@ public class Duck_AI : MonoBehaviour
                 _selectedWaypoints.Add(point);
             }
         }
+        _finalWaypoint = finalWaypoint;
         _selectedWaypoints.Add(_finalWaypoint);
     }
 
@@ -154,6 +182,7 @@ public class Duck_AI : MonoBehaviour
     IEnumerator HidingRoutine()
     {
         _agent.isStopped = true;
+        _agent.avoidancePriority = 0;
         float _hidingTime = ((Random.value * (_maxHidingTime - _minHidingTime)) + _minHidingTime);
         yield return new WaitForSeconds(_hidingTime);
         _isHiding = false;
@@ -161,6 +190,7 @@ public class Duck_AI : MonoBehaviour
         { // Occupy Code
             _currentState = State.Running;
             _agent.isStopped = false;
+            _agent.avoidancePriority = _designatedPriority;
             _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied(); // Occupy code
             _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy code
         } // Occupy Code
@@ -178,6 +208,7 @@ public class Duck_AI : MonoBehaviour
         {
             _currentState = State.Running;
             _agent.isStopped = false;
+            _agent.avoidancePriority = _designatedPriority;
             _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied();
             _selectedWaypoints[_currentWaypoint].SetToOccupied();
         }
