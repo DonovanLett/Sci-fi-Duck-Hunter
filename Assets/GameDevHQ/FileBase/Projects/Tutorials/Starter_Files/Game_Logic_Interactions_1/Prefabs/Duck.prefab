@@ -113,10 +113,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentState: 0
-  _columnWaypoints: []
   _finalWaypoint: {fileID: 0}
   _selectedWaypoints: []
   _currentWaypoint: 0
+  _designatedPriority: 0
   _isHiding: 0
   _minHidingTime: 0.62
   _maxHidingTime: 3.59
