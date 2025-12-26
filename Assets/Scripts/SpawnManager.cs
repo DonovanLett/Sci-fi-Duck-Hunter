@@ -24,6 +24,22 @@ public class SpawnManager : MonoBehaviour
     private float _minSpawnPause, _maxSpawnPause;
 
     private static int _currentDuckPriority = 1;
+
+    // Singleton
+    public static SpawnManager Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
