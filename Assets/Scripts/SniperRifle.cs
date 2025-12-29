@@ -10,11 +10,16 @@ public class SniperRifle : MonoBehaviour
     [SerializeField]
     private LayerMask _enemyMask;
 
+
+
     [SerializeField]
     private int _ammo;
 
     [SerializeField]
     private int _ammoCount;
+
+    [SerializeField]
+    private ParticleSystem _bulletSpark, _muzzleFlash;
 
 
     // Start is called before the first frame update
@@ -34,13 +39,21 @@ public class SniperRifle : MonoBehaviour
     {
         if (_ammoCount > 0)
         {
+            _muzzleFlash.Play();
             RaycastHit hitInfo;
+
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity, _enemyMask))
             {
                 if (hitInfo.collider.tag == "Duck" && hitInfo.collider.GetComponent<Duck_AI>() != null)
                 {
                     hitInfo.collider.GetComponent<Duck_AI>().OnShot();
                 }
+            }
+            else if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity))
+            {
+                ParticleSystem spark = Instantiate(_bulletSpark, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                spark.Play();
+                Destroy(spark, 5.0f);
             }
             _ammoCount--;
         }
