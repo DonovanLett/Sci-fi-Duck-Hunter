@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 5714025934351400431}
   - component: {fileID: 5714025934351400427}
   - component: {fileID: 2412930126167099331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Duck
-  m_TagString: Untagged
+  m_TagString: Duck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 5714025934390195145}
   - component: {fileID: 5714025934390195150}
   - component: {fileID: 5714025934390195151}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -254,7 +254,7 @@ GameObject:
   - component: {fileID: 5714025934710596231}
   - component: {fileID: 5714025934710596228}
   - component: {fileID: 5714025934710596229}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   - component: {fileID: 5714025935503007431}
   - component: {fileID: 5714025935503007428}
   - component: {fileID: 5714025935503007429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5714025935830008318}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
