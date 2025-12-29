@@ -216,14 +216,27 @@ public class Duck_AI : MonoBehaviour
     }
 
 
-    public void OnKilled()
+    public void OnShot()
     {
-        StopAllCoroutines();
-        _agent.isStopped = true;
-        _isHiding = false;
-        _currentState = State.Dead;
-        // Figure Out What to Do here in terms of Occupation
-        // Trigger Death Animation
+        if (_currentState != State.Dead)
+        {
+            StopAllCoroutines();
+            _agent.isStopped = true;
+            _isHiding = false;
+            _isHesitating = false;
+            if (_currentState == State.Running)
+            {
+                _selectedWaypoints[_currentWaypoint].SetToUnoccupied();
+            }
+            else
+            {
+                _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied();
+            }
+            _currentState = State.Dead;
+            Destroy(this.gameObject);
+            // Figure Out What to Do here in terms of Occupation
+            // Trigger Death Animation
+        }
     }
 
     public bool IsDead()
