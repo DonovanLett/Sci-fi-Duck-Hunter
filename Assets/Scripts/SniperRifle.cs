@@ -67,6 +67,38 @@ public class SniperRifle : MonoBehaviour
             AudioSource.PlayClipAtPoint(_shotSoundEffect, transform.position, 1.0f);
             RaycastHit hitInfo;
 
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity))
+            {
+                if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Shootable_Object"))
+                {
+                    if (hitInfo.collider.tag == "Duck" && hitInfo.collider.GetComponent<Duck_AI>() != null)
+                    {
+                        hitInfo.collider.GetComponent<Duck_AI>().OnShot();
+                    }
+                }
+                else
+                {
+                    ParticleSystem spark = Instantiate(_bulletSpark, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                    spark.Play();
+                    Destroy(spark, 5.0f);
+                }
+            }
+            _ammoCount--;
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(_emptyClickSoundEffect, transform.position, 1.0f);
+        }
+    }
+
+   /* private void Fire(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (_ammoCount > 0)
+        {
+            _muzzleFlash.Play();
+            AudioSource.PlayClipAtPoint(_shotSoundEffect, transform.position, 1.0f);
+            RaycastHit hitInfo;
+
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity, _enemyMask))
             {
                 if (hitInfo.collider.tag == "Duck" && hitInfo.collider.GetComponent<Duck_AI>() != null)
@@ -74,7 +106,7 @@ public class SniperRifle : MonoBehaviour
                     hitInfo.collider.GetComponent<Duck_AI>().OnShot();
                 }
             }
-            else if(Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity))
+            else if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity))
             {
                 ParticleSystem spark = Instantiate(_bulletSpark, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
                 spark.Play();
@@ -86,7 +118,7 @@ public class SniperRifle : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(_emptyClickSoundEffect, transform.position, 1.0f);
         }
-    }
+    } */
 
     // Update is called once per frame
     void Update()
