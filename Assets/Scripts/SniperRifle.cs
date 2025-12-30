@@ -8,7 +8,7 @@ public class SniperRifle : MonoBehaviour
     private PlayerInputActions _playerInput;
 
     [SerializeField]
-    private AudioClip _shotSoundEffect;
+    private AudioClip _shotSoundEffect, _emptyClickSoundEffect;
 
     [SerializeField]
     private LayerMask _enemyMask;
@@ -59,6 +59,10 @@ public class SniperRifle : MonoBehaviour
                 Destroy(spark, 5.0f);
             }
             _ammoCount--;
+        }
+        else
+        {
+            AudioSource.PlayClipAtPoint(_emptyClickSoundEffect, transform.position, 1.0f);
         }
     }
 

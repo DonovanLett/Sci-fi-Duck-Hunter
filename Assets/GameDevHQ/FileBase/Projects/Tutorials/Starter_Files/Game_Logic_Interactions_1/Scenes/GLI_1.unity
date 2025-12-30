@@ -32984,6 +32984,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shotSoundEffect: {fileID: 8300000, guid: 96f10e928ce961e48a0ed86765268928, type: 3}
+  _emptyClickSoundEffect: {fileID: 8300000, guid: 954ccc2602410354db687f68a3f9994d, type: 3}
   _enemyMask:
     serializedVersion: 2
     m_Bits: 64
