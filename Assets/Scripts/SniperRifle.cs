@@ -8,9 +8,10 @@ public class SniperRifle : MonoBehaviour
     private PlayerInputActions _playerInput;
 
     [SerializeField]
+    private AudioClip _shotSoundEffect;
+
+    [SerializeField]
     private LayerMask _enemyMask;
-
-
 
     [SerializeField]
     private int _ammo;
@@ -26,6 +27,7 @@ public class SniperRifle : MonoBehaviour
     void Start()
     {
         _ammoCount = _ammo;
+      //  _source = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -40,6 +42,7 @@ public class SniperRifle : MonoBehaviour
         if (_ammoCount > 0)
         {
             _muzzleFlash.Play();
+            AudioSource.PlayClipAtPoint(_shotSoundEffect, transform.position, 1.0f);
             RaycastHit hitInfo;
 
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity, _enemyMask))
