@@ -50,6 +50,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Collector"",
+            ""id"": ""7a39878d-c07e-4419-a69f-2c33f57988a0"",
+            ""actions"": [
+                {
+                    ""name"": ""Collect"",
+                    ""type"": ""Button"",
+                    ""id"": ""db3100f0-f312-470b-8211-10749bee00ee"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""b476aea0-e19c-4b35-868b-3d6b3487fed7"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Collect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -57,6 +85,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // SniperRifle
         m_SniperRifle = asset.FindActionMap("SniperRifle", throwIfNotFound: true);
         m_SniperRifle_Fire = m_SniperRifle.FindAction("Fire", throwIfNotFound: true);
+        // Collector
+        m_Collector = asset.FindActionMap("Collector", throwIfNotFound: true);
+        m_Collector_Collect = m_Collector.FindAction("Collect", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -160,8 +191,58 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public SniperRifleActions @SniperRifle => new SniperRifleActions(this);
+
+    // Collector
+    private readonly InputActionMap m_Collector;
+    private List<ICollectorActions> m_CollectorActionsCallbackInterfaces = new List<ICollectorActions>();
+    private readonly InputAction m_Collector_Collect;
+    public struct CollectorActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public CollectorActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Collect => m_Wrapper.m_Collector_Collect;
+        public InputActionMap Get() { return m_Wrapper.m_Collector; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CollectorActions set) { return set.Get(); }
+        public void AddCallbacks(ICollectorActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CollectorActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CollectorActionsCallbackInterfaces.Add(instance);
+            @Collect.started += instance.OnCollect;
+            @Collect.performed += instance.OnCollect;
+            @Collect.canceled += instance.OnCollect;
+        }
+
+        private void UnregisterCallbacks(ICollectorActions instance)
+        {
+            @Collect.started -= instance.OnCollect;
+            @Collect.performed -= instance.OnCollect;
+            @Collect.canceled -= instance.OnCollect;
+        }
+
+        public void RemoveCallbacks(ICollectorActions instance)
+        {
+            if (m_Wrapper.m_CollectorActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICollectorActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CollectorActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CollectorActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CollectorActions @Collector => new CollectorActions(this);
     public interface ISniperRifleActions
     {
         void OnFire(InputAction.CallbackContext context);
+    }
+    public interface ICollectorActions
+    {
+        void OnCollect(InputAction.CallbackContext context);
     }
 }

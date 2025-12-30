@@ -32985,9 +32985,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shotSoundEffect: {fileID: 8300000, guid: 96f10e928ce961e48a0ed86765268928, type: 3}
   _emptyClickSoundEffect: {fileID: 8300000, guid: 954ccc2602410354db687f68a3f9994d, type: 3}
+  _reloadSoundEffect: {fileID: 8300000, guid: 9af3d111639afc547923f229649424e9, type: 3}
   _enemyMask:
     serializedVersion: 2
     m_Bits: 64
+  _collectableMask:
+    serializedVersion: 2
+    m_Bits: 128
+  _collectableReachDistance: 100
   _ammo: 30
   _ammoCount: 30
   _bulletSpark: {fileID: 3088086561818561513, guid: 86991083bf70246cab4905f681be4c36, type: 3}

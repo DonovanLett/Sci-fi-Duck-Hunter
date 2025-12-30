@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Duck
+  - AmmoBox
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - Water
   - UI
   - Shootable_Object
-  - 
+  - Collectable_Object
   - 
   - 
   - 

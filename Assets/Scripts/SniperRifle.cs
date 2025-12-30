@@ -8,10 +8,15 @@ public class SniperRifle : MonoBehaviour
     private PlayerInputActions _playerInput;
 
     [SerializeField]
-    private AudioClip _shotSoundEffect, _emptyClickSoundEffect;
+    private AudioClip _shotSoundEffect, _emptyClickSoundEffect, _reloadSoundEffect;
 
     [SerializeField]
-    private LayerMask _enemyMask;
+    private LayerMask _enemyMask, _collectableMask;
+
+    [SerializeField]
+    private float _collectableReachDistance;
+
+    private GameObject _highLightedGameObject;
 
     [SerializeField]
     private int _ammo;
@@ -22,19 +27,36 @@ public class SniperRifle : MonoBehaviour
     [SerializeField]
     private ParticleSystem _bulletSpark, _muzzleFlash;
 
+    private bool wasHittingLastFrame = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _ammoCount = _ammo;
-      //  _source = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
     {
         _playerInput = new PlayerInputActions();
         _playerInput.SniperRifle.Enable();
+        _playerInput.Collector.Enable();
         _playerInput.SniperRifle.Fire.performed += Fire;
+        _playerInput.Collector.Collect.performed += Collect;
+    }
+
+    private void Collect(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        RaycastHit hitInfo;
+
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, _collectableReachDistance, _collectableMask))
+        {
+            if (hitInfo.collider.tag == "AmmoBox" && _ammoCount < _ammo)
+            {
+                AudioSource.PlayClipAtPoint(_reloadSoundEffect, transform.position, 1.0f);
+                _ammoCount++;
+            }
+        }
     }
 
     private void Fire(UnityEngine.InputSystem.InputAction.CallbackContext context)
@@ -69,12 +91,39 @@ public class SniperRifle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        RaycastHit hitInfo;
+        bool isHittingThisFrame = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, _collectableReachDistance, _collectableMask);
 
+        
+        if(isHittingThisFrame && !wasHittingLastFrame)
+        {
+            AmmoBox _ammoBoxScript = hitInfo.collider.GetComponent<AmmoBox>();
+            if (hitInfo.collider.tag == "AmmoBox" && _ammoBoxScript != null)
+            {
+                _ammoBoxScript.Highlighted();
+                _highLightedGameObject = hitInfo.collider.gameObject;
+            }
+        }
+
+        // EXIT: was hitting, but no longer is
+        if (wasHittingLastFrame && !isHittingThisFrame)
+        {
+            AmmoBox _ammoBoxScript = _highLightedGameObject.GetComponent<AmmoBox>();
+            if (_highLightedGameObject.tag == "AmmoBox" && _ammoBoxScript != null)
+            {
+                _ammoBoxScript.Unhighlighted();
+                _highLightedGameObject = null;
+            }
+        }
+
+        wasHittingLastFrame = isHittingThisFrame;
     }
 
     private void OnDisable()
     {
         _playerInput.SniperRifle.Fire.performed -= Fire;
+        _playerInput.Collector.Collect.performed -= Collect;
         _playerInput.SniperRifle.Disable();
+        _playerInput.Collector.Disable();
     }
 }
