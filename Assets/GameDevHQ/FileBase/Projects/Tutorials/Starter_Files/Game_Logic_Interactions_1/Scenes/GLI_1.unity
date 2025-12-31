@@ -37360,7 +37360,7 @@ MonoBehaviour:
   _collectableMask:
     serializedVersion: 2
     m_Bits: 128
-  _collectableReachDistance: 100
+  _collectableReachDistance: 2
   _ammo: 30
   _ammoCount: 30
   _bulletSpark: {fileID: 3088086561818561513, guid: 86991083bf70246cab4905f681be4c36, type: 3}
