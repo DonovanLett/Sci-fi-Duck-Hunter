@@ -8,6 +8,9 @@ public class SniperRifle : MonoBehaviour
     private PlayerInputActions _playerInput;
 
     [SerializeField]
+    private bool _canFire = false; // Timer Code
+
+    [SerializeField]
     private AudioClip _shotSoundEffect, _emptyClickSoundEffect, _reloadSoundEffect;
 
     [SerializeField]
@@ -47,6 +50,7 @@ public class SniperRifle : MonoBehaviour
 
     private void Collect(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+
         RaycastHit hitInfo;
 
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, _collectableReachDistance, _collectableMask))
@@ -61,33 +65,36 @@ public class SniperRifle : MonoBehaviour
 
     private void Fire(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        if (_ammoCount > 0)
+        if (_canFire)
         {
-            _muzzleFlash.Play();
-            AudioSource.PlayClipAtPoint(_shotSoundEffect, transform.position, 1.0f);
-            RaycastHit hitInfo;
-
-            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity))
+            if (_ammoCount > 0)
             {
-                if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Shootable_Object"))
+                _muzzleFlash.Play();
+                AudioSource.PlayClipAtPoint(_shotSoundEffect, transform.position, 1.0f);
+                RaycastHit hitInfo;
+
+                if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, Mathf.Infinity))
                 {
-                    if (hitInfo.collider.tag == "Duck" && hitInfo.collider.GetComponent<Duck_AI>() != null)
+                    if (hitInfo.collider.gameObject.layer == LayerMask.NameToLayer("Shootable_Object"))
                     {
-                        hitInfo.collider.GetComponent<Duck_AI>().OnShot();
+                        if (hitInfo.collider.tag == "Duck" && hitInfo.collider.GetComponent<Duck_AI>() != null)
+                        {
+                            hitInfo.collider.GetComponent<Duck_AI>().OnShot();
+                        }
+                    }
+                    else
+                    {
+                        ParticleSystem spark = Instantiate(_bulletSpark, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                        spark.Play();
+                        Destroy(spark, 5.0f);
                     }
                 }
-                else
-                {
-                    ParticleSystem spark = Instantiate(_bulletSpark, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                    spark.Play();
-                    Destroy(spark, 5.0f);
-                }
+                _ammoCount--;
             }
-            _ammoCount--;
-        }
-        else
-        {
-            AudioSource.PlayClipAtPoint(_emptyClickSoundEffect, transform.position, 1.0f);
+            else
+            {
+                AudioSource.PlayClipAtPoint(_emptyClickSoundEffect, transform.position, 1.0f);
+            }
         }
     }
 
@@ -119,6 +126,16 @@ public class SniperRifle : MonoBehaviour
             AudioSource.PlayClipAtPoint(_emptyClickSoundEffect, transform.position, 1.0f);
         }
     } */
+
+    public void SetCanFireToTrue()
+    {
+        _canFire = true;
+    }
+
+    public void SetCanFireToFalse()
+    {
+        _canFire = false;
+    }
 
     // Update is called once per frame
     void Update()

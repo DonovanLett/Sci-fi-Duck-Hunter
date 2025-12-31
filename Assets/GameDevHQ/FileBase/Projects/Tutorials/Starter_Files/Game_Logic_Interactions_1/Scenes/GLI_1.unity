@@ -21921,6 +21921,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2547513373256802044, guid: b7ac60955bcc5964bb42d98fef40028f, type: 3}
   m_PrefabInstance: {fileID: 218401900}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &946316445
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 946316447}
+  - component: {fileID: 946316446}
+  m_Layer: 0
+  m_Name: Head_Start_Timer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &946316446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946316445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1083b7b75d5ba3c408de63c30d1e8995, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sniperRifle: {fileID: 1525713689}
+  _isTimerStarted: 0
+  _isTimerDone: 0
+--- !u!4 &946316447
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946316445}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &949855669 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 54d251628e7924e3c8b42a06f1533e55, type: 3}
@@ -37351,6 +37397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32867017dad31a945a1aad429054a551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canFire: 0
   _shotSoundEffect: {fileID: 8300000, guid: 96f10e928ce961e48a0ed86765268928, type: 3}
   _emptyClickSoundEffect: {fileID: 8300000, guid: 954ccc2602410354db687f68a3f9994d, type: 3}
   _reloadSoundEffect: {fileID: 8300000, guid: 9af3d111639afc547923f229649424e9, type: 3}
@@ -43633,6 +43680,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6256298190299280052, guid: ec30b3650c282e54b982f9c4f1cf2e56, type: 3}
+      propertyPath: _poolSize
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256298190299280052, guid: ec30b3650c282e54b982f9c4f1cf2e56, type: 3}
       propertyPath: _finalWaypoint
       value: 
       objectReference: {fileID: 1786360484}
@@ -43640,6 +43691,10 @@ PrefabInstance:
       propertyPath: _numberOfDucks
       value: 17
       objectReference: {fileID: 0}
+    - target: {fileID: 6256298190299280052, guid: ec30b3650c282e54b982f9c4f1cf2e56, type: 3}
+      propertyPath: _headStartTimer
+      value: 
+      objectReference: {fileID: 946316446}
     - target: {fileID: 6256298190299280052, guid: ec30b3650c282e54b982f9c4f1cf2e56, type: 3}
       propertyPath: _columnWaypoints.Array.size
       value: 17

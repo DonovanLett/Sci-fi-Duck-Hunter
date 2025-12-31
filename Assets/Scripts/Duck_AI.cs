@@ -5,6 +5,12 @@ using UnityEngine.AI;
 
 public class Duck_AI : MonoBehaviour
 {
+    private static int _numOfDucks; // Timer Code
+
+    private static HeadStartTimer _headStartTimer; // Timer Code
+
+    private static bool _isCommunicatingWithTimer; // Timer Code
+
     private enum State
     {
         Running,
@@ -41,6 +47,7 @@ public class Duck_AI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _headStartTimer = FindObjectOfType<HeadStartTimer>(); // Timer Code
       /*  _agent = GetComponent<NavMeshAgent>();
 
         RandomizeWaypoints();
@@ -62,6 +69,12 @@ public class Duck_AI : MonoBehaviour
     {
         _designatedPriority = priority;
         _agent.avoidancePriority = _designatedPriority;
+    }
+
+    public void SetNumberOfDucks(int number) // Timer Code
+    {
+        _numOfDucks = number;
+        _isCommunicatingWithTimer = true;
     }
 
     public void DefineWaypoints(List<Waypoint> columnWaypoints, Waypoint finalWaypoint) // SpawnManager Code
@@ -153,6 +166,11 @@ public class Duck_AI : MonoBehaviour
                 }
                 break;
         }
+
+        if (_isCommunicatingWithTimer)
+        {
+            CommunicateWithTimer(); // Timer Code
+        }
     }
 
     private void SelectNewWaypoint()
@@ -215,6 +233,16 @@ public class Duck_AI : MonoBehaviour
         _isHesitating = false; // Maybe put this in an "else" statement
     }
 
+    private void CommunicateWithTimer() // Timer Code
+    {
+        if (transform.position.y <= 1.03882f || _numOfDucks >= 6 && _numOfDucks <= 11 && transform.position.y <= 4.63882f)
+        {
+           // Debug.Log("Duck Triggered Timer");
+            _headStartTimer.StartTimer();
+            _isCommunicatingWithTimer = false;
+        }
+    }
+
 
     public void OnShot()
     {
@@ -247,7 +275,8 @@ public class Duck_AI : MonoBehaviour
     private void Escape()
     {
         // Trigger code to subtract points for when a Duck escapes
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
+        // Destroy(this.gameObject);
     }
 
         

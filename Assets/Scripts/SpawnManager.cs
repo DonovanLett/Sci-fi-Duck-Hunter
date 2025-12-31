@@ -28,6 +28,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private float _minSpawnPause, _maxSpawnPause;
 
+    [SerializeField]
+    private HeadStartTimer _headStartTimer; // Timer Code
+
     private static int _currentDuckPriority = 1;
 
     // Singleton
@@ -58,6 +61,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
+        _duckPool[0].SetNumberOfDucks(0);
         for (int i = 0; i < _numberOfDucks; i++)
         {
             float _spawnPause = ((Random.value * (_maxSpawnPause - _minSpawnPause)) + _minSpawnPause);
@@ -70,6 +74,17 @@ public class SpawnManager : MonoBehaviour
             _currentDuckPriority++;
         }
         _currentDuckPriority = 1;
+        CommunicateWithHeadStartTimer(); // Timer Code
+        _duckPool[0].SetNumberOfDucks(_numberOfDucks); // Timer Code
+    }
+
+    private void CommunicateWithHeadStartTimer() // Timer Code
+    {
+        if(_numberOfDucks <= 5)
+        {
+            Debug.Log("Spawn Manager Triggered Timer");
+            _headStartTimer.StartTimer();
+        }
     }
 
    /* IEnumerator SpawnRoutine()
