@@ -233,8 +233,8 @@ public class Duck_AI : MonoBehaviour
                 _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied();
             }
             _currentState = State.Dead;
-            Destroy(this.gameObject);
-            // Figure Out What to Do here in terms of Occupation
+            gameObject.SetActive(false);
+            // Destroy(this.gameObject);
             // Trigger Death Animation
         }
     }
