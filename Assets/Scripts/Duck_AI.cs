@@ -11,6 +11,8 @@ public class Duck_AI : MonoBehaviour
 
     private static bool _isCommunicatingWithTimer; // Timer Code
 
+    private static PointSystem _pointSystem; // Point Code
+
     private enum State
     {
         Running,
@@ -48,6 +50,7 @@ public class Duck_AI : MonoBehaviour
     void Start()
     {
         _headStartTimer = FindObjectOfType<HeadStartTimer>(); // Timer Code
+        _pointSystem = FindObjectOfType<PointSystem>(); // Point Code
       /*  _agent = GetComponent<NavMeshAgent>();
 
         RandomizeWaypoints();
@@ -243,7 +246,6 @@ public class Duck_AI : MonoBehaviour
         }
     }
 
-
     public void OnShot()
     {
         if (_currentState != State.Dead)
@@ -261,6 +263,7 @@ public class Duck_AI : MonoBehaviour
                 _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied();
             }
             _currentState = State.Dead;
+            _pointSystem.CheckDucks(); // Point System
             gameObject.SetActive(false);
             // Destroy(this.gameObject);
             // Trigger Death Animation

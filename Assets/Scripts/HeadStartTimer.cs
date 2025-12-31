@@ -10,6 +10,8 @@ public class HeadStartTimer : MonoBehaviour
     private bool _isTimerStarted;
     [SerializeField]
     private bool _isTimerDone;
+    
+    private PointSystem _pointSystem; // Point Code
 
     public static HeadStartTimer Instance;
 
@@ -27,7 +29,7 @@ public class HeadStartTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _pointSystem = FindObjectOfType<PointSystem>(); // Point Code
     }
 
     public void StartTimer()
@@ -45,7 +47,7 @@ public class HeadStartTimer : MonoBehaviour
         yield return new WaitForSeconds(_timer);
         _sniperRifle.SetCanFireToTrue();
         Debug.Log("Player Can Shoot");
-        // Give Player Ability To Shoot
+        _pointSystem.StartTimer(); // Point Code
         _isTimerDone = true;
     }
 

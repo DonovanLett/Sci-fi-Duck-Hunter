@@ -31,6 +31,9 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private HeadStartTimer _headStartTimer; // Timer Code
 
+    [SerializeField]
+    private PointSystem _pointSystem; // Point Code
+
     private static int _currentDuckPriority = 1;
 
     // Singleton
@@ -61,6 +64,7 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
+        List<Duck_AI> _ducks = new List<Duck_AI>(); // Point Code
         _duckPool[0].SetNumberOfDucks(0);
         for (int i = 0; i < _numberOfDucks; i++)
         {
@@ -71,18 +75,19 @@ public class SpawnManager : MonoBehaviour
             _duckPool[i].gameObject.SetActive(true);
             _duckPool[i].DefineWaypoints(_columnWaypoints, _finalWaypoint);
             _duckPool[i].SetDuckPriority(_currentDuckPriority);
+            _ducks.Add(_duckPool[i]); // Point Code
             _currentDuckPriority++;
         }
         _currentDuckPriority = 1;
         CommunicateWithHeadStartTimer(); // Timer Code
         _duckPool[0].SetNumberOfDucks(_numberOfDucks); // Timer Code
+        _pointSystem.SetDucks(_ducks); // Point Code
     }
 
     private void CommunicateWithHeadStartTimer() // Timer Code
     {
         if(_numberOfDucks <= 5)
         {
-            Debug.Log("Spawn Manager Triggered Timer");
             _headStartTimer.StartTimer();
         }
     }
