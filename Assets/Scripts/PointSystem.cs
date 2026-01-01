@@ -12,6 +12,8 @@ public class PointSystem : MonoBehaviour
 
     private int _currentPoints;
 
+    private bool _isPlayerDead;
+
     [SerializeField]
     private float _pointDecayDuration;
 
@@ -57,7 +59,7 @@ public class PointSystem : MonoBehaviour
             elapsed += Time.deltaTime;
 
             float t = elapsed / _pointDecayDuration;
-            _currentPoints = (int)(Mathf.Lerp(_maxPoints, _minPoints, t));
+            _currentPoints = (int)(Mathf.Abs((Mathf.Lerp(_maxPoints, _minPoints, t))));
 
             yield return null;
         }
@@ -83,7 +85,7 @@ public class PointSystem : MonoBehaviour
     public void CheckDucks()
     {
         foreach(var duck in _currentDucks){
-            if (duck.IsDead() == false)
+            if (duck.IsDead() == false && duck.IsEscaped() == false)
             {
                 return;
             }
@@ -92,10 +94,22 @@ public class PointSystem : MonoBehaviour
         FinalizeResults();
     }
 
+    public void PlayerLost()
+    {
+        _isPlayerDead = true;
+    }
+
     private void FinalizeResults()
     {
         StopAllCoroutines();
-        Debug.Log(_currentPoints);
+        if(_isPlayerDead == false)
+        {
+            Debug.Log(_currentPoints);
+        }
+        else
+        {
+            Debug.Log("Eaten By Ducks");
+        }
     }
 
     // Update is called once per frame

@@ -6823,7 +6823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxPoints: 1000
   _minPoints: 10
-  _pointDecayDuration: 50
+  _pointDecayDuration: 60
 --- !u!4 &342868588
 Transform:
   m_ObjectHideFlags: 0
@@ -43739,7 +43739,7 @@ PrefabInstance:
       objectReference: {fileID: 1786360484}
     - target: {fileID: 6256298190299280052, guid: ec30b3650c282e54b982f9c4f1cf2e56, type: 3}
       propertyPath: _numberOfDucks
-      value: 5
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 6256298190299280052, guid: ec30b3650c282e54b982f9c4f1cf2e56, type: 3}
       propertyPath: _headStartTimer

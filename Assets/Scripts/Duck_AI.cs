@@ -19,6 +19,7 @@ public class Duck_AI : MonoBehaviour
         Hiding,
         Waiting, // Occupy Code
         Dead,
+        Escaped,
     }
 
     [SerializeField]
@@ -82,6 +83,7 @@ public class Duck_AI : MonoBehaviour
 
     public void DefineWaypoints(List<Waypoint> columnWaypoints, Waypoint finalWaypoint) // SpawnManager Code
     {
+        _currentState = State.Running; // Win/Lose Code
         _agent = GetComponent<NavMeshAgent>();
         RandomizeWaypoints(columnWaypoints, finalWaypoint);
         if (_selectedWaypoints.Count > 1)
@@ -275,9 +277,17 @@ public class Duck_AI : MonoBehaviour
         return _currentState == State.Dead;
     }
 
+    public bool IsEscaped()
+    {
+        return _currentState == State.Escaped;
+    }
+
     private void Escape()
     {
         // Trigger code to subtract points for when a Duck escapes
+        _currentState = State.Escaped;
+        _pointSystem.PlayerLost();
+        _pointSystem.CheckDucks();
         gameObject.SetActive(false);
         // Destroy(this.gameObject);
     }
