@@ -15,8 +15,6 @@ public class PointSystem : MonoBehaviour
     [SerializeField]
     private float _pointDecayDuration;
 
-    private float _pointTimer; // Change Later
-
     private List<Duck_AI> _currentDucks;
 
     // Singleton
@@ -47,25 +45,40 @@ public class PointSystem : MonoBehaviour
     public void StartTimer()
     {
         _currentPoints = _maxPoints;
-        _pointTimer = _pointDecayDuration;
         StartCoroutine(PointDecay());
     }
 
-    IEnumerator PointDecay()
+    IEnumerator PointDecay() // AI GENERATED: REVIEW AND LEARN FROM LATER!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     {
-        while (_pointTimer >= 0)
+        float elapsed = 0f;
+
+        while (elapsed < _pointDecayDuration)
         {
-            yield return new WaitForSeconds(00.01f);
-            _pointTimer -= 00.01f;
-            if (_pointTimer < 0f)
-            {
-                _pointTimer = 0f;
-                Debug.Log("PointDecayEnded");
-                yield break;
-            }
+            elapsed += Time.deltaTime;
+
+            float t = elapsed / _pointDecayDuration;
+            _currentPoints = (int)(Mathf.Lerp(_maxPoints, _minPoints, t));
+
+            yield return null;
         }
+
+        _currentPoints = _minPoints;
     }
 
+  /*  IEnumerator PointDecay()
+    {
+        float countDown = _pointDecayDuration;
+        while (countDown > 0)
+        {
+            yield return new WaitForSeconds(00.01f);
+            countDown -= 00.01f;
+            if (countDown <= 0f)
+            {
+                countDown = 0f;
+            }
+            _currentPoints = (int)((((countDown / _pointDecayDuration) * ((float)(_maxPoints) - (float)(_minPoints))) + (float)(_minPoints)));
+        }
+    } */
 
     public void CheckDucks()
     {
@@ -82,10 +95,8 @@ public class PointSystem : MonoBehaviour
     private void FinalizeResults()
     {
         StopAllCoroutines();
-        int finalTally = (int)((((_pointTimer/_pointDecayDuration) * (_maxPoints - _minPoints)) + _minPoints));
         Debug.Log(_currentPoints);
     }
-
 
     // Update is called once per frame
     void Update()
