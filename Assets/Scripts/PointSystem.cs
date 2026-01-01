@@ -12,12 +12,21 @@ public class PointSystem : MonoBehaviour
 
     private int _currentPoints;
 
+    private int _finalTally; // Round Manager Code
+
     private bool _isPlayerDead;
 
     [SerializeField]
     private float _pointDecayDuration;
 
     private List<Duck_AI> _currentDucks;
+
+    private RoundManager _roundManager; // Round Manager Code
+
+    private HeadStartTimer _headStartTimer;
+
+    [SerializeField]
+    private SniperRifle _sniper; // Round Manager Code
 
     // Singleton
     public static PointSystem Instance;
@@ -36,7 +45,8 @@ public class PointSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _roundManager = FindObjectOfType<RoundManager>(); // Round Manager Code
+        _headStartTimer = FindObjectOfType<HeadStartTimer>(); // Round Manager Code
     }
 
     public void SetDucks(List<Duck_AI> ducks)
@@ -90,8 +100,11 @@ public class PointSystem : MonoBehaviour
                 return;
             }
         }
+        _headStartTimer.RestartTimer(); // Round Manager Code
+        _sniper.SetCanFireToFalse(); // Round Manager Code
+
         Debug.Log("Round Ended");
-        FinalizeResults();
+        FinalizeRoundResults(); // Round Manager Code: Originally named FinalizeResults()
     }
 
     public void PlayerLost()
@@ -99,17 +112,25 @@ public class PointSystem : MonoBehaviour
         _isPlayerDead = true;
     }
 
-    private void FinalizeResults()
+    private void FinalizeRoundResults() // Round Manager Code: Originally named FinalizeResults()
     {
         StopAllCoroutines();
         if(_isPlayerDead == false)
         {
             Debug.Log(_currentPoints);
+            _finalTally += _currentPoints; // Round Manager Code
+            _currentPoints = 0; // Round Manager Code
+            _roundManager.CurrentRoundCompleted(); // Round Manager Code
         }
         else
         {
             Debug.Log("Eaten By Ducks");
         }
+    }
+
+    public void FinalizeGameResults() // Round Manager Code
+    {
+        Debug.Log("Final Tally: " + _finalTally);
     }
 
     // Update is called once per frame

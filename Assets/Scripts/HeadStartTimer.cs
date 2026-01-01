@@ -61,6 +61,12 @@ public class HeadStartTimer : MonoBehaviour
         }
     }
 
+    public void RestartTimer() // Round Manager Code
+    {
+        _isTimerStarted = false;
+        _isTimerDone = false;
+    }
+
     // Update is called once per frame
     void Update()
     {

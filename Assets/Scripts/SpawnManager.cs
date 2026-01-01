@@ -13,7 +13,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private int _poolSize = 20;
 
-    [SerializeField]
+     [SerializeField] // Lined out as part of Round Manager Code
     private int _numberOfDucks;
 
     [SerializeField]
@@ -35,6 +35,8 @@ public class SpawnManager : MonoBehaviour
     private PointSystem _pointSystem; // Point Code
 
     private static int _currentDuckPriority = 1;
+
+    private RoundManager _roundManager; // Round Manager Code
 
     // Singleton
     public static SpawnManager Instance;
@@ -59,6 +61,14 @@ public class SpawnManager : MonoBehaviour
             duck.gameObject.SetActive(false);
             _duckPool.Add(duck);
         }
+        _roundManager = FindObjectOfType<RoundManager>(); // Round Manager Code
+        _roundManager.StartFirstRound(); // Round Manager Code (Might be useless and needlessly complicated
+        //  StartCoroutine(SpawnRoutine()); Lined out as part of Round Manager Code
+    }
+
+    public void StartRound(int duckNumber) // Round Manager Code
+    {
+        _numberOfDucks = duckNumber;
         StartCoroutine(SpawnRoutine());
     }
 

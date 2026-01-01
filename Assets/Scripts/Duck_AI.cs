@@ -97,7 +97,7 @@ public class Duck_AI : MonoBehaviour
             _isMakingFinalDash = true;
         }
         _targetedPosition = _selectedWaypoints[_currentWaypoint].transform.position;
-        _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy Code
+       // _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy Code ////////////// Maybe add back in later
     }
 
     private void RandomizeWaypoints(List<Waypoint> columnWaypoints, Waypoint finalWaypoint)
@@ -121,11 +121,13 @@ public class Duck_AI : MonoBehaviour
             if (waypoint.IsOccupied() == false)
             { 
                 waypoint.SetToOccupied();
+               // Debug.Log(waypoint + " set to Occupied"); /////////////////
                 _agent.SetDestination(waypoint.transform.position);
                 if(waypoint == _finalWaypoint) // MAKE SURE THIS ACTUALLY WORKS LATER
                 {
                     _isMakingFinalDash = true;
                 }
+               // _targetedPosition = waypoint.transform.position; ///////////////////////
                 return;
             }
             else
@@ -215,7 +217,9 @@ public class Duck_AI : MonoBehaviour
             _agent.isStopped = false;
             _agent.avoidancePriority = _designatedPriority;
             _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied(); // Occupy code
+           // Debug.Log(_selectedWaypoints[_currentWaypoint - 1] + " set to Unoccupied"); ////////
             _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy code
+           // Debug.Log(_selectedWaypoints[_currentWaypoint] + " set to Occupied"); ////////
         } // Occupy Code
         else // Occupy Code
         { // Occupy Code
@@ -233,7 +237,9 @@ public class Duck_AI : MonoBehaviour
             _agent.isStopped = false;
             _agent.avoidancePriority = _designatedPriority;
             _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied();
+           // Debug.Log(_selectedWaypoints[_currentWaypoint - 1] + " set to Unoccupied"); /////
             _selectedWaypoints[_currentWaypoint].SetToOccupied();
+           // Debug.Log(_selectedWaypoints[_currentWaypoint] + " set to Occupied"); /////////////
         }
         _isHesitating = false; // Maybe put this in an "else" statement
     }
@@ -259,12 +265,16 @@ public class Duck_AI : MonoBehaviour
             if (_currentState == State.Running)
             {
                 _selectedWaypoints[_currentWaypoint].SetToUnoccupied();
+               // Debug.Log(_selectedWaypoints[_currentWaypoint] + " set to Unoccupied"); /////
             }
             else
             {
                 _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied();
+               // Debug.Log(_selectedWaypoints[_currentWaypoint - 1] + " set to Unoccupied"); ////
             }
             _currentState = State.Dead;
+            _selectedWaypoints = new List<Waypoint>(); // Round Manager Code
+            _currentWaypoint = 0; // Round Manager Code
             _pointSystem.CheckDucks(); // Point System
             gameObject.SetActive(false);
             // Destroy(this.gameObject);
