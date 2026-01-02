@@ -36,6 +36,7 @@ public class SpawnManager : MonoBehaviour
 
     private static int _currentDuckPriority = 1;
 
+    [SerializeField]
     private RoundManager _roundManager; // Round Manager Code
 
     // Singleton

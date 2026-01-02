@@ -31,7 +31,7 @@ public class RoundManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _spawnManager = FindObjectOfType<SpawnManager>();
+       // _spawnManager = FindObjectOfType<SpawnManager>();
         _pointSystem = FindObjectOfType<PointSystem>();
     }
 
@@ -43,6 +43,7 @@ public class RoundManager : MonoBehaviour
 
     public void StartFirstRound()
     {
+        _spawnManager = FindObjectOfType<SpawnManager>();
         _spawnManager.StartRound(_rounds[_currentRound]);
     }
 
