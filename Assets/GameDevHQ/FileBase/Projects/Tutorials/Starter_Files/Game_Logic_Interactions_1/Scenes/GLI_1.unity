@@ -43739,6 +43739,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1786360484}
     - target: {fileID: 6256298190299280052, guid: ec30b3650c282e54b982f9c4f1cf2e56, type: 3}
+      propertyPath: _maxSpawnPause
+      value: 2.148
+      objectReference: {fileID: 0}
+    - target: {fileID: 6256298190299280052, guid: ec30b3650c282e54b982f9c4f1cf2e56, type: 3}
       propertyPath: _numberOfDucks
       value: 5
       objectReference: {fileID: 0}
@@ -49195,7 +49199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c605108a7f7a34947aabfd3baeff631f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rounds: 05000000080000000b0000000e00000011000000
+  _rounds: 010000000300000005000000080000000b0000000e00000011000000
   _currentRound: 0
 --- !u!4 &1962709249
 Transform:
