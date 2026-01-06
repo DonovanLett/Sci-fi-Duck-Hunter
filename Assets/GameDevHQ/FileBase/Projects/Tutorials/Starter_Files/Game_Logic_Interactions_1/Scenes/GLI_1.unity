@@ -21279,17 +21279,62 @@ MonoBehaviour:
   _narratorText: {fileID: 694641605}
   _roundTextGroups:
   - _roundTexts:
+    - _pauseBeforeTyping: 1
+      _text: Hello
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 1
+      _text: This is a test
+      _pauseAfterTyping: 1
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 1
+      _text: ' of the new Round Text System'
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 1
+      _text: Begin
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+  - _roundTexts:
+    - _pauseBeforeTyping: 1
+      _text: Round 2
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+  - _roundTexts:
+    - _pauseBeforeTyping: 1
+      _text: Round 3
+      _pauseAfterTyping: 1
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+  - _roundTexts:
+    - _pauseBeforeTyping: 1
+      _text: Round 4
+      _pauseAfterTyping: 1
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+  - _roundTexts:
     - _pauseBeforeTyping: 0
-      _text: 
+      _text: Round 5
       _pauseAfterTyping: 0
       _doesWipeText: 0
       _doesPrintWholeTextImmediately: 0
-  - _roundTexts: []
-  - _roundTexts: []
-  - _roundTexts: []
-  - _roundTexts: []
-  - _roundTexts: []
-  - _roundTexts: []
+  - _roundTexts:
+    - _pauseBeforeTyping: 1
+      _text: Round 6
+      _pauseAfterTyping: 1
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+  - _roundTexts:
+    - _pauseBeforeTyping: 1
+      _text: Final Round
+      _pauseAfterTyping: 1
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
 --- !u!1 &871463534 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 25457142623534554971bf209f8976d3, type: 3}

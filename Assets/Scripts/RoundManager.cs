@@ -59,7 +59,9 @@ public class RoundManager : MonoBehaviour
     public void StartFirstRound()
     {
         _spawnManager = FindObjectOfType<SpawnManager>();
-        _spawnManager.StartRound(_rounds[_currentRound]);
+        _worldSpaceUI = FindObjectOfType<WorldSpaceUIManager>(); // UI Code
+        _worldSpaceUI.TriggerRoundText(_currentRound); //  UI Code
+       // _spawnManager.StartRound(_rounds[_currentRound]); // Crossed out for UI Code
     }
 
     public void CurrentRoundCompleted()
@@ -71,7 +73,13 @@ public class RoundManager : MonoBehaviour
         else
         {
             _currentRound++;
-            _spawnManager.StartRound(_rounds[_currentRound]);
+            _worldSpaceUI.TriggerRoundText(_currentRound); //  UI Code
+           // _spawnManager.StartRound(_rounds[_currentRound]); // Crossed out for UI Code
         }
+    }
+
+    public void TriggerNextRound() // UI Code
+    {
+        _spawnManager.StartRound(_rounds[_currentRound]);
     }
 }

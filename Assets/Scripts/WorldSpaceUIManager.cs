@@ -12,11 +12,11 @@ public class WorldSpaceUIManager : MonoBehaviour
     [SerializeField]
     public RoundTextGroup[] _roundTextGroups;
 
-    private SpawnManager _spawnManager;
+    private RoundManager _roundManager;
     // Start is called before the first frame update
     void Start()
     {
-        
+        _roundManager = FindObjectOfType<RoundManager>();
     }
 
     // Update is called once per frame
@@ -62,7 +62,7 @@ public class WorldSpaceUIManager : MonoBehaviour
         }
 
         _narratorText.text = "";
-       // _spawnManager.StartRound(round);
+        _roundManager.TriggerNextRound();
 
     }
 }
