@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,9 @@ public class RoundManager : MonoBehaviour
 
     private PointSystem _pointSystem;
 
+    [SerializeField]
+    private WorldSpaceUIManager _worldSpaceUI; // UI Code
+
     // Singleton
     public static RoundManager Instance;
 
@@ -25,6 +29,17 @@ public class RoundManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    private void OnValidate() // UI Code
+    {
+        if (_rounds == null || _worldSpaceUI._roundTextGroups == null)
+            return;
+
+        if (_worldSpaceUI._roundTextGroups.Length != _rounds.Length)
+        {
+            System.Array.Resize(ref _worldSpaceUI._roundTextGroups, _rounds.Length);
+        }
     }
 
 
