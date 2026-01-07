@@ -16,6 +16,20 @@ public class WorldSpaceUIManager : MonoBehaviour
     private AudioClip _clickSoundEffect;
 
     private RoundManager _roundManager;
+
+    // Singleton
+    public static WorldSpaceUIManager Instance;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
+
     // Start is called before the first frame update
     void Start()
     {

@@ -15,7 +15,6 @@ public class RoundManager : MonoBehaviour
 
     private PointSystem _pointSystem;
 
-    [SerializeField]
     private WorldSpaceUIManager _worldSpaceUI; // UI Code
 
     // Singleton
@@ -33,6 +32,7 @@ public class RoundManager : MonoBehaviour
 
     private void OnValidate() // UI Code
     {
+        _worldSpaceUI = FindObjectOfType<WorldSpaceUIManager>(); // UI Code
         if (_rounds == null || _worldSpaceUI._roundTextGroups == null)
             return;
 
