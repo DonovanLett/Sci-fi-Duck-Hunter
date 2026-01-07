@@ -21280,61 +21280,251 @@ MonoBehaviour:
   _roundTextGroups:
   - _roundTexts:
     - _pauseBeforeTyping: 1
-      _text: Hello
-      _pauseAfterTyping: 1
+      _text: WASD to Move
+      _pauseAfterTyping: 0.5
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: <br><br>Space Key to Jump
+      _pauseAfterTyping: 0.5
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: <br><br>Left Shift to Run
+      _pauseAfterTyping: 0.5
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: <br><br>M to Shoot
+      _pauseAfterTyping: 0.5
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: <br><br>C to Crouch
+      _pauseAfterTyping: 6
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 1
+      _text: Each round, escaped cannibal Duckies will be appearing at the top floor
+        of this facility in front of you, attempting to escape down to the Exit on
+        the bottom floor, and temporarily hiding behind the large vertical pillars
+        that line their trail.
+      _pauseAfterTyping: 10
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: Based on the loaded, 30-round, semi-automatic sniper rifle in your hands
+      _pauseAfterTyping: 0.5
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: ', you can probably guess what YOUR objective is going to be.'
+      _pauseAfterTyping: 6
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 1
-      _text: This is a test
+      _text: The faster you kill them all
+      _pauseAfterTyping: 0.2
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: ', the more points you recieve for the round.'
+      _pauseAfterTyping: 3
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 1
+      _text: One Duck slips by
       _pauseAfterTyping: 1
       _doesWipeText: 0
       _doesPrintWholeTextImmediately: 0
-    - _pauseBeforeTyping: 1
-      _text: ' of the new Round Text System'
-      _pauseAfterTyping: 1
+    - _pauseBeforeTyping: 0
+      _text: ', it''s Game Over.'
+      _pauseAfterTyping: 3
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 1
-      _text: Begin
+      _text: There is also a randomized pause between the Ducks beginning to spawn
+        in and you being able to fire
+      _pauseAfterTyping: 0.5
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: ' (to prevent puppy guarding the spawn point and what-not).'
+      _pauseAfterTyping: 6
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: "It\u2019s enough time for them to get properly spread out across the
+        map in different hiding places, but also not enough time for any of them
+        to fully reach the Exit."
+      _pauseAfterTyping: 7
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: 'Utilize this time to gauge where each Duck is hiding, and remember:'
+      _pauseAfterTyping: 0.5
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: ' no hiding spot can hold two Ducks at once.'
+      _pauseAfterTyping: 5
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: Seven rounds, with an increasing number of Ducks each time.
+      _pauseAfterTyping: 3
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: As we said, you start with 30 bullets in the chamber, and can refill
+        at any point with the Ammo Box behind you
+      _pauseAfterTyping: 0.5
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: ' (on the shelf to the left of the Door, glows yellow when you hover
+        over it)...'
+      _pauseAfterTyping: 10
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: "\u2026however you must click E for each individual bullet, leaving
+        the shooting range completely unoccupied for however long you take."
+      _pauseAfterTyping: 6
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 1
+      _text: Above all else, there is one rule that you must never forget.
+      _pauseAfterTyping: 3
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: Have fun.
+      _pauseAfterTyping: 0.945
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: ' (:'
+      _pauseAfterTyping: 3
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 1
+      _text: 10
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 9
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 8
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 7
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 6
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 5
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 4
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 3
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 2
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 1
+      _pauseAfterTyping: 1
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 1
+    - _pauseBeforeTyping: 0
+      _text: 0
       _pauseAfterTyping: 1
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 1
   - _roundTexts:
     - _pauseBeforeTyping: 1
-      _text: Round 2
-      _pauseAfterTyping: 1
+      _text: Round 1 Completed. <points> Points Earned.
+      _pauseAfterTyping: 2
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: Onto Round 2.
+      _pauseAfterTyping: 3
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
   - _roundTexts:
     - _pauseBeforeTyping: 1
-      _text: Round 3
-      _pauseAfterTyping: 1
-      _doesWipeText: 0
+      _text: Round 2 Completed. <points> Points Earned.
+      _pauseAfterTyping: 2
+      _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
-  - _roundTexts:
-    - _pauseBeforeTyping: 1
-      _text: Round 4
-      _pauseAfterTyping: 1
-      _doesWipeText: 0
-      _doesPrintWholeTextImmediately: 0
-  - _roundTexts:
     - _pauseBeforeTyping: 0
-      _text: Round 5
-      _pauseAfterTyping: 0
+      _text: Onto Round 3
+      _pauseAfterTyping: 3
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+  - _roundTexts:
+    - _pauseBeforeTyping: 1
+      _text: Round 3 Completed. <points> Points Earned.
+      _pauseAfterTyping: 2
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: Onto Round 4
+      _pauseAfterTyping: 3
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+  - _roundTexts:
+    - _pauseBeforeTyping: 1
+      _text: Round 4 Completed. <points> Points Earned.
+      _pauseAfterTyping: 2
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: Onto Round 5
+      _pauseAfterTyping: 3
       _doesWipeText: 0
       _doesPrintWholeTextImmediately: 0
   - _roundTexts:
     - _pauseBeforeTyping: 1
-      _text: Round 6
-      _pauseAfterTyping: 1
-      _doesWipeText: 0
+      _text: Round 5 Completed. <points> Points Earned. Onto Round 6
+      _pauseAfterTyping: 2
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: Onto Round 6
+      _pauseAfterTyping: 3
+      _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
   - _roundTexts:
     - _pauseBeforeTyping: 1
       _text: Final Round
-      _pauseAfterTyping: 1
-      _doesWipeText: 0
+      _pauseAfterTyping: 3
+      _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
+  _clickSoundEffect: {fileID: 8300000, guid: 721193f134cf07d4a9072edbf5bc6852, type: 3}
 --- !u!1 &871463534 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 25457142623534554971bf209f8976d3, type: 3}

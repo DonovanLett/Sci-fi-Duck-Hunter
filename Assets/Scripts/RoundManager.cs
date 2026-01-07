@@ -60,11 +60,11 @@ public class RoundManager : MonoBehaviour
     {
         _spawnManager = FindObjectOfType<SpawnManager>();
         _worldSpaceUI = FindObjectOfType<WorldSpaceUIManager>(); // UI Code
-        _worldSpaceUI.TriggerRoundText(_currentRound); //  UI Code
+        _worldSpaceUI.TriggerRoundText(_currentRound, 0); //  UI Code
        // _spawnManager.StartRound(_rounds[_currentRound]); // Crossed out for UI Code
     }
 
-    public void CurrentRoundCompleted()
+    public void CurrentRoundCompleted(int points)
     {
         if (_currentRound == (_rounds.Length - 1))
         {
@@ -73,7 +73,7 @@ public class RoundManager : MonoBehaviour
         else
         {
             _currentRound++;
-            _worldSpaceUI.TriggerRoundText(_currentRound); //  UI Code
+            _worldSpaceUI.TriggerRoundText(_currentRound, points); //  UI Code
            // _spawnManager.StartRound(_rounds[_currentRound]); // Crossed out for UI Code
         }
     }

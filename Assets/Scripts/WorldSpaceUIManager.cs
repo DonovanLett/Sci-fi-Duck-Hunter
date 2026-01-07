@@ -12,6 +12,9 @@ public class WorldSpaceUIManager : MonoBehaviour
     [SerializeField]
     public RoundTextGroup[] _roundTextGroups;
 
+    [SerializeField]
+    private AudioClip _clickSoundEffect;
+
     private RoundManager _roundManager;
     // Start is called before the first frame update
     void Start()
@@ -25,29 +28,35 @@ public class WorldSpaceUIManager : MonoBehaviour
         
     }
 
-    public void TriggerRoundText(int round)
+    public void TriggerRoundText(int round, int points)
     {
-        StartCoroutine(RoundText(round));
+        StartCoroutine(RoundText(round, points));
     }
 
-    IEnumerator RoundText(int round)
+    IEnumerator RoundText(int round, int points)
     {
         RoundTextGroup currentRound = _roundTextGroups[round];
         for (int i = 0; i < currentRound._roundTexts.Length; i++)
         {
             RoundText currentText = currentRound._roundTexts[i];
 
+            if( currentText._text.Contains("<points>"))
+            {
+                currentText._text = currentText._text.Replace("<points>", (points).ToString());
+            }
+
             yield return new WaitForSeconds(currentText._pauseBeforeTyping);
 
             if (currentText._doesPrintWholeTextImmediately)
             {
-                _narratorText.text = currentText._text;
+                AudioSource.PlayClipAtPoint(_clickSoundEffect, transform.position, 1.0f);
+                _narratorText.text += currentText._text;
             }
             else
             {
                 foreach (char letter in currentText._text)
                 {
-                    //AudioSource.PlayClipAtPoint(_typeWriterSoundEffect, _camera.transform.position, 90f);
+                    AudioSource.PlayClipAtPoint(_clickSoundEffect, transform.position, 1.0f);
                     _narratorText.text += letter;
                     yield return new WaitForSeconds(0.05f); // Figure out the delay there should be between each letter
                 }
@@ -60,9 +69,7 @@ public class WorldSpaceUIManager : MonoBehaviour
                 _narratorText.text = "";
             }
         }
-
         _narratorText.text = "";
         _roundManager.TriggerNextRound();
-
     }
 }
