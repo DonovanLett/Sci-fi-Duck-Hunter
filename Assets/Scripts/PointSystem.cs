@@ -119,8 +119,8 @@ public class PointSystem : MonoBehaviour
         {
             Debug.Log(_currentPoints);
             _finalTally += _currentPoints; // Round Manager Code
+            _roundManager.CurrentRoundCompleted(_currentPoints); // Round Manager Code
             _currentPoints = 0; // Round Manager Code
-            _roundManager.CurrentRoundCompleted(); // Round Manager Code
         }
         else
         {

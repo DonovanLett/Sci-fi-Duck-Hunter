@@ -32,11 +32,14 @@ public class SniperRifle : MonoBehaviour
 
     private bool wasHittingLastFrame = false;
 
+    private ScreenSpaceUIManager _screenSpaceUIManager; // UI Code
+
 
     // Start is called before the first frame update
     void Start()
     {
         _ammoCount = _ammo;
+        _screenSpaceUIManager = FindObjectOfType<ScreenSpaceUIManager>(); // UI Code
     }
 
     private void OnEnable()
@@ -59,6 +62,7 @@ public class SniperRifle : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(_reloadSoundEffect, transform.position, 1.0f);
                 _ammoCount++;
+                _screenSpaceUIManager.SwitchOffReloadText();
             }
         }
     }
@@ -94,6 +98,7 @@ public class SniperRifle : MonoBehaviour
             else
             {
                 AudioSource.PlayClipAtPoint(_emptyClickSoundEffect, transform.position, 1.0f);
+                _screenSpaceUIManager.TriggerReloadText(); // UI Code
             }
         }
     }
@@ -130,6 +135,7 @@ public class SniperRifle : MonoBehaviour
     public void SetCanFireToTrue()
     {
         _canFire = true;
+        _screenSpaceUIManager.TriggerFireText(); // UI Code
     }
 
     public void SetCanFireToFalse()
