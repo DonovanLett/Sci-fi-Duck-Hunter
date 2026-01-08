@@ -17,6 +17,8 @@ public class RoundManager : MonoBehaviour
 
     private WorldSpaceUIManager _worldSpaceUI; // UI Code
 
+    private ScreenSpaceUIManager _screenSpaceUI;
+
     // Singleton
     public static RoundManager Instance;
 
@@ -48,6 +50,7 @@ public class RoundManager : MonoBehaviour
     {
        // _spawnManager = FindObjectOfType<SpawnManager>();
         _pointSystem = FindObjectOfType<PointSystem>();
+        _screenSpaceUI = FindObjectOfType<ScreenSpaceUIManager>(); // UI Code
     }
 
     // Update is called once per frame
@@ -66,6 +69,7 @@ public class RoundManager : MonoBehaviour
 
     public void CurrentRoundCompleted(int points)
     {
+        _screenSpaceUI.SwitchOffAll(); // UI Code
         if (_currentRound == (_rounds.Length - 1))
         {
             _pointSystem.FinalizeGameResults();
@@ -80,6 +84,7 @@ public class RoundManager : MonoBehaviour
 
     public void TriggerNextRound() // UI Code
     {
+        _screenSpaceUI.TriggerSteadyText(); // UI Code
         _spawnManager.StartRound(_rounds[_currentRound]);
     }
 }

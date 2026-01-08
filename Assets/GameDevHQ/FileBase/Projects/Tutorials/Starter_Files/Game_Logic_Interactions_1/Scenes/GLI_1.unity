@@ -969,6 +969,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 27318113}
+  - component: {fileID: 27318114}
   m_Layer: 5
   m_Name: Reload_Holder
   m_TagString: Untagged
@@ -996,6 +997,25 @@ RectTransform:
   m_AnchoredPosition: {x: -1127, y: -687}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!320 &27318114
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 27318112}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: db26a7212ce931147a04bc0fc23e21a3, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 1
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 3433735791923530127, guid: db26a7212ce931147a04bc0fc23e21a3, type: 2}
+    value: {fileID: 488470609}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &29928278 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 54d251628e7924e3c8b42a06f1533e55, type: 3}
@@ -10942,6 +10962,7 @@ GameObject:
   - component: {fileID: 488470606}
   - component: {fileID: 488470608}
   - component: {fileID: 488470607}
+  - component: {fileID: 488470609}
   m_Layer: 5
   m_Name: Reload...
   m_TagString: Untagged
@@ -11065,6 +11086,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488470605}
   m_CullTransparentMesh: 1
+--- !u!95 &488470609
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488470605}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &490868081
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17228,6 +17270,53 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &730240075
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 730240076}
+  - component: {fileID: 730240077}
+  m_Layer: 0
+  m_Name: UI_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &730240076
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730240075}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &730240077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730240075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cabcd588ce771f42a94a015249e0a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _steadyHolder: {fileID: 774692630}
+  _fireHolder: {fileID: 1240508896}
+  _reloadHolder: {fileID: 27318112}
+  _fireTimeline: {fileID: 1240508898}
 --- !u!1001 &732825091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19063,6 +19152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 774692631}
+  - component: {fileID: 774692632}
   m_Layer: 5
   m_Name: Steady_Holder
   m_TagString: Untagged
@@ -19090,6 +19180,25 @@ RectTransform:
   m_AnchoredPosition: {x: -1127, y: -687}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!320 &774692632
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 774692630}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 84e2dd1240b9720448e6a13026451a1c, type: 2}
+  m_InitialState: 1
+  m_WrapMode: 1
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: -971443648500718920, guid: 84e2dd1240b9720448e6a13026451a1c, type: 2}
+    value: {fileID: 1017363085}
+  m_ExposedReferences:
+    m_References: []
 --- !u!4 &776267399 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 54d251628e7924e3c8b42a06f1533e55, type: 3}
@@ -21489,6 +21598,12 @@ MonoBehaviour:
   _roundTextGroups:
   - _roundTexts:
     - _pauseBeforeTyping: 1
+      _text: You are the primary Head of Security at the Cannibal Duckie Research
+        Facility in Livingston, Illinois (CDRF for short).
+      _pauseAfterTyping: 5
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 1
       _text: Each round, escaped cannibal Duckies will be appearing at the top floor
         of this facility in front of you, attempting to escape down to the Exit on
         the bottom floor, and temporarily hiding behind the large vertical pillars
@@ -21729,11 +21844,21 @@ MonoBehaviour:
       _doesPrintWholeTextImmediately: 0
   - _roundTexts:
     - _pauseBeforeTyping: 1
+      _text: Round 6 Completed.
+      _pauseAfterTyping: 0.59
+      _doesWipeText: 0
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
+      _text: ' <points> Points Earned.'
+      _pauseAfterTyping: 2
+      _doesWipeText: 1
+      _doesPrintWholeTextImmediately: 0
+    - _pauseBeforeTyping: 0
       _text: Final Round
       _pauseAfterTyping: 3
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
-    - _pauseBeforeTyping: 4.79
+    - _pauseBeforeTyping: 2.326
       _text: You know what?
       _pauseAfterTyping: 3
       _doesWipeText: 1
@@ -25527,6 +25652,7 @@ GameObject:
   - component: {fileID: 1017363082}
   - component: {fileID: 1017363084}
   - component: {fileID: 1017363083}
+  - component: {fileID: 1017363085}
   m_Layer: 5
   m_Name: Steady...
   m_TagString: Untagged
@@ -25584,7 +25710,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190335
+    rgba: 301990143
   m_fontColor: {r: 1, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -25652,6 +25778,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1017363081}
   m_CullTransparentMesh: 1
+--- !u!95 &1017363085
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017363081}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1018255008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30905,6 +31052,7 @@ GameObject:
   - component: {fileID: 1204621625}
   - component: {fileID: 1204621627}
   - component: {fileID: 1204621626}
+  - component: {fileID: 1204621628}
   m_Layer: 5
   m_Name: Fire!
   m_TagString: Untagged
@@ -31028,6 +31176,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1204621624}
   m_CullTransparentMesh: 1
+--- !u!95 &1204621628
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1204621624}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1204785160
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32039,13 +32208,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1240508897}
+  - component: {fileID: 1240508898}
   m_Layer: 5
   m_Name: Fire_Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1240508897
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32066,6 +32236,27 @@ RectTransform:
   m_AnchoredPosition: {x: -1127, y: -687}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!320 &1240508898
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240508896}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 11400000, guid: 0bf791ae70a1d9443b11eb745d3a1bf3, type: 2}
+  m_InitialState: 0
+  m_WrapMode: 2
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 1184888983364030681, guid: 0bf791ae70a1d9443b11eb745d3a1bf3, type: 2}
+    value: {fileID: 1204621624}
+  - key: {fileID: -7281999230865090192, guid: 0bf791ae70a1d9443b11eb745d3a1bf3, type: 2}
+    value: {fileID: 1204621628}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &1240660515 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 81fd26d52fdd946c3b009279fbeccbc5, type: 3}
