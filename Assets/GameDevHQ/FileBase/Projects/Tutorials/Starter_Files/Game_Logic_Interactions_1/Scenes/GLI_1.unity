@@ -23513,6 +23513,8 @@ MonoBehaviour:
   _sniperRifle: {fileID: 1525713689}
   _isTimerStarted: 0
   _isTimerDone: 0
+  _minTimerLength: 3
+  _maxTimerLength: 4
 --- !u!4 &946316447
 Transform:
   m_ObjectHideFlags: 0
@@ -46556,7 +46558,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6301322309018229593, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.035198
+      value: 0.035198
       objectReference: {fileID: 0}
     - target: {fileID: 6301322309018229593, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_LocalPosition.z

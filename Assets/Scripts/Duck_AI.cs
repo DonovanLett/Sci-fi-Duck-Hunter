@@ -50,6 +50,13 @@ public class Duck_AI : MonoBehaviour
     [SerializeField]
     private Vector3 _targetedPosition;
 
+    [Header("Y-Positions To Trigger Head Start Timer")]
+    [SerializeField]
+    private float _secondLevel;
+    [SerializeField]
+    private float _firstLevel;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -274,7 +281,7 @@ public class Duck_AI : MonoBehaviour
 
     private void CommunicateWithTimer() // Timer Code
     {
-        if (transform.position.y <= 1.03882f || _numOfDucks >= 6 && _numOfDucks <= 11 && transform.position.y <= 4.63882f)
+        if (transform.position.y <= _firstLevel || _numOfDucks >= 6 && _numOfDucks <= 11 && transform.position.y <= _secondLevel) // Robot Code (originally 1.03882 and 4.63882)
         {
            // Debug.Log("Duck Triggered Timer");
             _headStartTimer.StartTimer();
