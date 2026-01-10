@@ -82,7 +82,7 @@ public class SpawnManager : MonoBehaviour
             float _spawnPause = ((Random.value * (_maxSpawnPause - _minSpawnPause)) + _minSpawnPause);
             yield return new WaitForSeconds(_spawnPause);
             _duckPool[i].gameObject.transform.position = transform.position;
-            _duckPool[i].gameObject.transform.rotation = Quaternion.identity;
+            _duckPool[i].gameObject.transform.rotation = transform.rotation; // Robot Code, originally Quaternion.identity, which sets the rotation to (0, 0, 0) World Space.
             _duckPool[i].gameObject.SetActive(true);
             _duckPool[i].DefineWaypoints(_columnWaypoints, _finalWaypoint);
             _duckPool[i].SetDuckPriority(_currentDuckPriority);
