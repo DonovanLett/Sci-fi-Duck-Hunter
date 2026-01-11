@@ -23,9 +23,6 @@ public class SpawnManager : MonoBehaviour
     private Waypoint _finalWaypoint;
 
     [SerializeField]
-    private bool _isSpawning;
-
-    [SerializeField]
     private float _minSpawnPause, _maxSpawnPause;
 
     [SerializeField]

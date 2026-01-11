@@ -44,7 +44,7 @@ public class Duck_AI : MonoBehaviour
     [SerializeField]
     private float _minHesitatingTime, _maxHesitatingTime; // Occupy Code
     [SerializeField]
-    private bool _isMakingFinalDash = false;
+    private bool _isMakingFinalDash = false; 
 
 
     [SerializeField]
@@ -105,7 +105,7 @@ public class Duck_AI : MonoBehaviour
         if(_animator != null)
         {
             _animator.SetFloat("Speed", 3.1f); // Robot Code
-        }
+        } 
         _agent = GetComponent<NavMeshAgent>();
         RandomizeWaypoints(columnWaypoints, finalWaypoint);
         if (_selectedWaypoints.Count > 1)
@@ -165,8 +165,13 @@ public class Duck_AI : MonoBehaviour
         switch (_currentState)
         {
             case State.Running:
+                //_animator.SetFloat("Speed", _agent.velocity.magnitude); // Robot Code
                 if (transform.position == _targetedPosition)
                 {
+                    if (_animator != null) // Robot Code
+                    { // Robot Code
+                        _animator.SetFloat("Speed", 0); // Robot Code
+                    } // Robot Code
                     if (_isMakingFinalDash)
                     {
                         Escape();
@@ -313,6 +318,7 @@ public class Duck_AI : MonoBehaviour
             _pointSystem.CheckDucks(); // Point System
             if (_animator != null) // Robot Code
             { // Robot Code
+                _animator.SetFloat("Speed", 0); // Robot Code
                 _animator.SetTrigger("Death"); // Robot Code
             } // Robot Code
             else // Robot Code
