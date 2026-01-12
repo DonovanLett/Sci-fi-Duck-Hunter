@@ -7,6 +7,8 @@ namespace GameDevHQ.FileBase.Plugins.FPS_Character_Controller
     [RequireComponent(typeof(CharacterController))]
     public class FPS_Controller : MonoBehaviour
     {
+        [SerializeField]
+        private bool _canMove;
         [Header("Controller Info")]
         [SerializeField ][Tooltip("How fast can the controller walk?")]
         private float _walkSpeed = 3.0f; //how fast the character is walking
@@ -57,9 +59,17 @@ namespace GameDevHQ.FileBase.Plugins.FPS_Character_Controller
                 Cursor.lockState = CursorLockMode.None;
             }
 
-            FPSController();
-            CameraController();
-            HeadBobbing(); 
+            if (_canMove)
+            {
+                FPSController();
+                CameraController();
+                HeadBobbing();
+            }
+        }
+
+        public void EnableMovement()
+        {
+            _canMove = true;
         }
 
         void FPSController()

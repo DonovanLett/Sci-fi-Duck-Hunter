@@ -63,7 +63,7 @@ public class RoundManager : MonoBehaviour
     {
         _spawnManager = FindObjectOfType<SpawnManager>();
         _worldSpaceUI = FindObjectOfType<WorldSpaceUIManager>(); // UI Code
-        _worldSpaceUI.TriggerRoundText(_currentRound, 0); //  UI Code
+       // _worldSpaceUI.TriggerRoundText(_currentRound, 0); //  UI Code
        // _spawnManager.StartRound(_rounds[_currentRound]); // Crossed out for UI Code
     }
 
