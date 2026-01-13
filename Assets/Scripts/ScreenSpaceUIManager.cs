@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Playables;
+using GameDevHQ.FileBase.Plugins.FPS_Character_Controller;
 
 public class ScreenSpaceUIManager : MonoBehaviour
 {
+    [Header("In-Game UI")]
     [SerializeField]
     private GameObject _steadyHolder;
     [SerializeField]
@@ -14,6 +17,16 @@ public class ScreenSpaceUIManager : MonoBehaviour
     private GameObject _reloadHolder;
     [SerializeField]
     private PlayableDirector _fireTimeline;
+
+    [Header("End UI")]
+    [SerializeField]
+    private PointSystem _pointSystem;
+    [SerializeField]
+    private TMP_Text _finalScoreText;
+    [SerializeField]
+    private AudioSource _finalScoreAudio;
+    [SerializeField]
+    private PlayableDirector _finalTextTimeline;
 
     // Singleton
     public static ScreenSpaceUIManager Instance;
@@ -72,6 +85,25 @@ public class ScreenSpaceUIManager : MonoBehaviour
         }
         _reloadHolder.SetActive(false);
     }
+
+    public void StartFinalTally()
+    {
+        _pointSystem = FindObjectOfType<PointSystem>();
+        StartCoroutine(RisingFinalScore());
+    }
+
+    IEnumerator RisingFinalScore()
+    {
+        _finalScoreAudio.Play();
+        for (int i = 1; i < _pointSystem.FinalTally(); i++)
+        {
+            _finalScoreText.text = i.ToString();
+            yield return null;
+        }
+        _finalScoreAudio.Stop();
+        _finalTextTimeline.Play();
+    }
+
 
     // Start is called before the first frame update
     void Start()

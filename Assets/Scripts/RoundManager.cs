@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class RoundManager : MonoBehaviour
 {
@@ -10,6 +11,14 @@ public class RoundManager : MonoBehaviour
 
     [SerializeField]
     private int _currentRound;
+
+    [SerializeField]
+    private AudioSource _roundMusic;
+
+    [SerializeField]
+    private PlayableDirector _fadeOutTimeline; // End
+
+    private bool _isRoundMusicPlaying = false;
 
     private SpawnManager _spawnManager;
 
@@ -72,7 +81,11 @@ public class RoundManager : MonoBehaviour
         _screenSpaceUI.SwitchOffAll(); // UI Code
         if (_currentRound == (_rounds.Length - 1))
         {
-            _pointSystem.FinalizeGameResults();
+
+            //_pointSystem.FinalizeGameResults(); // Cut out for end
+            _fadeOutTimeline.Play(); // End
+            _roundMusic.Stop(); // Music Code
+            _isRoundMusicPlaying = false; // Music Code
         }
         else
         {
@@ -86,5 +99,10 @@ public class RoundManager : MonoBehaviour
     {
         _screenSpaceUI.TriggerSteadyText(); // UI Code
         _spawnManager.StartRound(_rounds[_currentRound]);
+        if (_isRoundMusicPlaying == false) // Music Code
+        {
+            _roundMusic.Play();
+            _isRoundMusicPlaying = true;
+        }
     }
 }

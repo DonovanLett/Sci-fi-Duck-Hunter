@@ -133,6 +133,11 @@ public class PointSystem : MonoBehaviour
         Debug.Log("Final Tally: " + _finalTally);
     }
 
+    public float FinalTally()
+    {
+        return _finalTally;
+    }
+
     // Update is called once per frame
     void Update()
     {
