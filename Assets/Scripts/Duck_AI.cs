@@ -299,6 +299,7 @@ public class Duck_AI : MonoBehaviour
         if (_currentState != State.Dead)
         {
             StopAllCoroutines();
+            _isMakingFinalDash = false; //
             _agent.isStopped = true;
             _isHiding = false;
             _isHesitating = false;
