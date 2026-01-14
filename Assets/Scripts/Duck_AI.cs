@@ -27,6 +27,7 @@ public class Duck_AI : MonoBehaviour
     private State _currentState = State.Running;
     private NavMeshAgent _agent;
     private Animator _animator; // Robot Code
+    private CapsuleCollider _collider;
     [SerializeField]
     private Waypoint _finalWaypoint;
     [SerializeField]
@@ -62,6 +63,7 @@ public class Duck_AI : MonoBehaviour
     {
         _headStartTimer = FindObjectOfType<HeadStartTimer>(); // Timer Code
         _pointSystem = FindObjectOfType<PointSystem>(); // Point Code
+        _collider = GetComponent<CapsuleCollider>();
         if(GetComponent<Animator>() != null) // Robot Code
         { // Robot Code
             _animator = GetComponent<Animator>(); // Robot Code
@@ -300,6 +302,7 @@ public class Duck_AI : MonoBehaviour
         {
             StopAllCoroutines();
             _isMakingFinalDash = false; //
+            _collider.enabled = false;
             _agent.isStopped = true;
             _isHiding = false;
             _isHesitating = false;
@@ -335,6 +338,7 @@ public class Duck_AI : MonoBehaviour
     {
         _animator.ResetTrigger("Death");
         gameObject.SetActive(false);
+        _collider.enabled = true;
     }
 
     public bool IsDead()
