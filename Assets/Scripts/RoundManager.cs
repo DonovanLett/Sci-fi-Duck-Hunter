@@ -1,3 +1,4 @@
+using GameDevHQ.FileBase.Plugins.FPS_Character_Controller;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,6 +28,8 @@ public class RoundManager : MonoBehaviour
     private WorldSpaceUIManager _worldSpaceUI; // UI Code
 
     private ScreenSpaceUIManager _screenSpaceUI;
+
+    private FPS_Controller _playerBody;
 
     // Singleton
     public static RoundManager Instance;
@@ -60,6 +63,7 @@ public class RoundManager : MonoBehaviour
        // _spawnManager = FindObjectOfType<SpawnManager>();
         _pointSystem = FindObjectOfType<PointSystem>();
         _screenSpaceUI = FindObjectOfType<ScreenSpaceUIManager>(); // UI Code
+        _playerBody = FindObjectOfType<FPS_Controller>();
     }
 
     // Update is called once per frame
@@ -83,6 +87,7 @@ public class RoundManager : MonoBehaviour
         {
 
             //_pointSystem.FinalizeGameResults(); // Cut out for end
+            _playerBody.DisableMovement();
             _fadeOutTimeline.Play(); // End
             _roundMusic.Stop(); // Music Code
             _isRoundMusicPlaying = false; // Music Code

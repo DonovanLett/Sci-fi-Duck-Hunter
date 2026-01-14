@@ -72,6 +72,11 @@ namespace GameDevHQ.FileBase.Plugins.FPS_Character_Controller
             _canMove = true;
         }
 
+        public void DisableMovement()
+        {
+            _canMove = false;
+        }
+
         void FPSController()
         {
             float h = Input.GetAxis("Horizontal"); //horizontal inputs (a, d, leftarrow, rightarrow)
