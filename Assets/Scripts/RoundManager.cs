@@ -99,6 +99,7 @@ public class RoundManager : MonoBehaviour
     {
         _screenSpaceUI.TriggerSteadyText(); // UI Code
         _spawnManager.StartRound(_rounds[_currentRound]);
+        _screenSpaceUI.RobotNumber(_rounds[_currentRound]); // Ammo/Robot Code
         if (_isRoundMusicPlaying == false) // Music Code
         {
             _roundMusic.Play();

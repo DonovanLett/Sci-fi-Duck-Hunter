@@ -17,6 +17,10 @@ public class ScreenSpaceUIManager : MonoBehaviour
     private GameObject _reloadHolder;
     [SerializeField]
     private PlayableDirector _fireTimeline;
+    [SerializeField]
+    private GameObject _ammoHolder, _robotHolder; // Ammo/Robot Code
+    [SerializeField]
+    private TMP_Text _ammoText, _robotText; // Ammo/Robot Code
 
     [Header("End UI")]
     [SerializeField]
@@ -73,6 +77,16 @@ public class ScreenSpaceUIManager : MonoBehaviour
     public void SwitchOffReloadText()
     {
         _reloadHolder.SetActive(false);
+    }
+
+    public void AmmoNumber(int number)
+    {
+        _ammoText.text = number.ToString();
+    }
+
+    public void RobotNumber(int number)
+    {
+        _robotText.text = number.ToString();
     }
 
     public void SwitchOffAll()

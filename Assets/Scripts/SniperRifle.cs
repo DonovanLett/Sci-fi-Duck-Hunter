@@ -62,6 +62,7 @@ public class SniperRifle : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(_reloadSoundEffect, transform.position, 1.0f);
                 _ammoCount++;
+                _screenSpaceUIManager.AmmoNumber(_ammoCount);
                 _screenSpaceUIManager.SwitchOffReloadText();
             }
         }
@@ -94,6 +95,7 @@ public class SniperRifle : MonoBehaviour
                     }
                 }
                 _ammoCount--;
+                _screenSpaceUIManager.AmmoNumber(_ammoCount);
             }
             else
             {
