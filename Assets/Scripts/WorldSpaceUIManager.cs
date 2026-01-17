@@ -42,6 +42,11 @@ public class WorldSpaceUIManager : MonoBehaviour
         
     }
 
+    public void TriggerFirstRound()
+    {
+        StartCoroutine(RoundText(0, 0));
+    }
+
     public void TriggerRoundText(int round, int points)
     {
         StartCoroutine(RoundText(round, points));

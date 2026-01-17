@@ -26,6 +26,8 @@ public class Duck_AI : MonoBehaviour
     [SerializeField]
     private State _currentState = State.Running;
     private NavMeshAgent _agent;
+    private Animator _animator; // Robot Code
+    private CapsuleCollider _collider;
     [SerializeField]
     private Waypoint _finalWaypoint;
     [SerializeField]
@@ -43,32 +45,44 @@ public class Duck_AI : MonoBehaviour
     [SerializeField]
     private float _minHesitatingTime, _maxHesitatingTime; // Occupy Code
     [SerializeField]
-    private bool _isMakingFinalDash = false;
+    private bool _isMakingFinalDash = false; 
 
 
     [SerializeField]
     private Vector3 _targetedPosition;
+
+    [Header("Y-Positions To Trigger Head Start Timer")]
+    [SerializeField]
+    private float _secondLevel;
+    [SerializeField]
+    private float _firstLevel;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _headStartTimer = FindObjectOfType<HeadStartTimer>(); // Timer Code
         _pointSystem = FindObjectOfType<PointSystem>(); // Point Code
-      /*  _agent = GetComponent<NavMeshAgent>();
+        _collider = GetComponent<CapsuleCollider>();
+        if(GetComponent<Animator>() != null) // Robot Code
+        { // Robot Code
+            _animator = GetComponent<Animator>(); // Robot Code
+        } // Robot Code
+        /*  _agent = GetComponent<NavMeshAgent>();
 
-        RandomizeWaypoints();
-        if (_selectedWaypoints.Count > 1)
-        {
-            SelectFirstWaypoint(); // Occupy Code
-           // _agent.SetDestination(_selectedWaypoints[_currentWaypoint].transform.position); // Original before Occupy Code
-        }
-        else
-        {
-            _agent.SetDestination(_finalWaypoint.transform.position);
-            _isMakingFinalDash = true;
-        }
-        _targetedPosition = _selectedWaypoints[_currentWaypoint].transform.position;
-        _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy Code */
+          RandomizeWaypoints();
+          if (_selectedWaypoints.Count > 1)
+          {
+              SelectFirstWaypoint(); // Occupy Code
+             // _agent.SetDestination(_selectedWaypoints[_currentWaypoint].transform.position); // Original before Occupy Code
+          }
+          else
+          {
+              _agent.SetDestination(_finalWaypoint.transform.position);
+              _isMakingFinalDash = true;
+          }
+          _targetedPosition = _selectedWaypoints[_currentWaypoint].transform.position;
+          _selectedWaypoints[_currentWaypoint].SetToOccupied(); // Occupy Code */
     }
 
     public void SetDuckPriority(int priority)
@@ -85,7 +99,15 @@ public class Duck_AI : MonoBehaviour
 
     public void DefineWaypoints(List<Waypoint> columnWaypoints, Waypoint finalWaypoint) // SpawnManager Code
     {
+        if (GetComponent<Animator>() != null) // Robot Code
+        { // Robot Code
+            _animator = GetComponent<Animator>(); // Robot Code
+        } // Robot Code
         _currentState = State.Running; // Win/Lose Code
+        if(_animator != null)
+        {
+            _animator.SetFloat("Speed", 3.1f); // Robot Code
+        } 
         _agent = GetComponent<NavMeshAgent>();
         RandomizeWaypoints(columnWaypoints, finalWaypoint);
         if (_selectedWaypoints.Count > 1)
@@ -145,8 +167,13 @@ public class Duck_AI : MonoBehaviour
         switch (_currentState)
         {
             case State.Running:
+                //_animator.SetFloat("Speed", _agent.velocity.magnitude); // Robot Code
                 if (transform.position == _targetedPosition)
                 {
+                    if (_animator != null) // Robot Code
+                    { // Robot Code
+                        _animator.SetFloat("Speed", 0); // Robot Code
+                    } // Robot Code
                     if (_isMakingFinalDash)
                     {
                         Escape();
@@ -160,6 +187,10 @@ public class Duck_AI : MonoBehaviour
             case State.Hiding:
                 if(_isHiding == false)
                 {
+                    if (_animator != null)
+                    {
+                        _animator.SetBool("Hiding", true); // Robot Code
+                    }
                     StartCoroutine(HidingRoutine());
                     _isHiding = true;
                 }
@@ -216,6 +247,11 @@ public class Duck_AI : MonoBehaviour
         if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false) // Occupy Code
         { // Occupy Code
             _currentState = State.Running;
+            if (_animator != null)
+            {
+                _animator.SetBool("Hiding", false); // Robot Code
+                _animator.SetFloat("Speed", 3.1f); // Robot Code
+            }
             _agent.isStopped = false;
             _agent.avoidancePriority = _designatedPriority;
             _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied(); // Occupy code
@@ -236,6 +272,10 @@ public class Duck_AI : MonoBehaviour
         if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false)
         {
             _currentState = State.Running;
+            if(_animator != null) { 
+                _animator.SetBool("Hiding", false); // Robot Code
+                _animator.SetFloat("Speed", 3.1f); // Robot Code
+            }
             _agent.isStopped = false;
             _agent.avoidancePriority = _designatedPriority;
             _selectedWaypoints[_currentWaypoint - 1].SetToUnoccupied();
@@ -248,7 +288,7 @@ public class Duck_AI : MonoBehaviour
 
     private void CommunicateWithTimer() // Timer Code
     {
-        if (transform.position.y <= 1.03882f || _numOfDucks >= 6 && _numOfDucks <= 11 && transform.position.y <= 4.63882f)
+        if (transform.position.y <= _firstLevel || _numOfDucks >= 6 && _numOfDucks <= 11 && transform.position.y <= _secondLevel) // Robot Code (originally 1.03882 and 4.63882)
         {
            // Debug.Log("Duck Triggered Timer");
             _headStartTimer.StartTimer();
@@ -261,6 +301,8 @@ public class Duck_AI : MonoBehaviour
         if (_currentState != State.Dead)
         {
             StopAllCoroutines();
+            _isMakingFinalDash = false; //
+            _collider.enabled = false;
             _agent.isStopped = true;
             _isHiding = false;
             _isHesitating = false;
@@ -278,10 +320,25 @@ public class Duck_AI : MonoBehaviour
             _selectedWaypoints = new List<Waypoint>(); // Round Manager Code
             _currentWaypoint = 0; // Round Manager Code
             _pointSystem.CheckDucks(); // Point System
-            gameObject.SetActive(false);
-            // Destroy(this.gameObject);
-            // Trigger Death Animation
+            if (_animator != null) // Robot Code
+            { // Robot Code
+                _animator.SetFloat("Speed", 0); // Robot Code
+                _animator.SetTrigger("Death"); // Robot Code
+            } // Robot Code
+            else // Robot Code
+            { // Robot Code
+                gameObject.SetActive(false);
+            } // Robot Code
+
+           // gameObject.SetActive(false); // Crossed out for Robot Code
         }
+    }
+
+    public void OnDeathAnimationComplete() // Robot Code
+    {
+        _animator.ResetTrigger("Death");
+        gameObject.SetActive(false);
+        _collider.enabled = true;
     }
 
     public bool IsDead()

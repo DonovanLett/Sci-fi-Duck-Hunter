@@ -10,6 +10,8 @@ public class HeadStartTimer : MonoBehaviour
     private bool _isTimerStarted;
     [SerializeField]
     private bool _isTimerDone;
+    [SerializeField]
+    private float _minTimerLength, _maxTimerLength; // Robot Code
     
     private PointSystem _pointSystem; // Point Code
 
@@ -43,7 +45,7 @@ public class HeadStartTimer : MonoBehaviour
 
     IEnumerator Timer()
     {
-        float _timer = ((Random.value * (4.0f - 3.0f)) + 3.0f);
+        float _timer = ((Random.value * (_maxTimerLength - _minTimerLength)) + _minTimerLength);
         yield return new WaitForSeconds(_timer);
         _sniperRifle.SetCanFireToTrue();
         Debug.Log("Player Can Shoot");

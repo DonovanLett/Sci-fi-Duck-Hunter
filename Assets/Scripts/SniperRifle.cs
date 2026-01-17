@@ -11,6 +11,9 @@ public class SniperRifle : MonoBehaviour
     private bool _canFire = false; // Timer Code
 
     [SerializeField]
+    private bool _canCollect = true; // Game Over Code
+
+    [SerializeField]
     private AudioClip _shotSoundEffect, _emptyClickSoundEffect, _reloadSoundEffect;
 
     [SerializeField]
@@ -56,12 +59,13 @@ public class SniperRifle : MonoBehaviour
 
         RaycastHit hitInfo;
 
-        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, _collectableReachDistance, _collectableMask))
+        if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, _collectableReachDistance, _collectableMask) && _canCollect) // _canCollect is Game Over Code
         {
             if (hitInfo.collider.tag == "AmmoBox" && _ammoCount < _ammo)
             {
                 AudioSource.PlayClipAtPoint(_reloadSoundEffect, transform.position, 1.0f);
                 _ammoCount++;
+                _screenSpaceUIManager.AmmoNumber(_ammoCount);
                 _screenSpaceUIManager.SwitchOffReloadText();
             }
         }
@@ -94,6 +98,7 @@ public class SniperRifle : MonoBehaviour
                     }
                 }
                 _ammoCount--;
+                _screenSpaceUIManager.AmmoNumber(_ammoCount);
             }
             else
             {
@@ -143,14 +148,23 @@ public class SniperRifle : MonoBehaviour
         _canFire = false;
     }
 
+    public void SetCanCollectToFalse() // Game Over Code
+    {
+        _canCollect = false;
+    }
+
     // Update is called once per frame
     void Update()
     {
         RaycastHit hitInfo;
         bool isHittingThisFrame = Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hitInfo, _collectableReachDistance, _collectableMask);
 
-        
-        if(isHittingThisFrame && !wasHittingLastFrame)
+        if (!(_canCollect)) // Game Over Code
+        {
+            isHittingThisFrame = false;
+        }
+
+        if (isHittingThisFrame && !wasHittingLastFrame)
         {
             AmmoBox _ammoBoxScript = hitInfo.collider.GetComponent<AmmoBox>();
             if (hitInfo.collider.tag == "AmmoBox" && _ammoBoxScript != null)

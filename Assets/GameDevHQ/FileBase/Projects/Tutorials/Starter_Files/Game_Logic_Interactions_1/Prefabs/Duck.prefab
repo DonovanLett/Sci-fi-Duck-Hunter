@@ -125,6 +125,8 @@ MonoBehaviour:
   _maxHesitatingTime: 0.91
   _isMakingFinalDash: 0
   _targetedPosition: {x: 0, y: 0, z: 0}
+  _secondLevel: 4.63882
+  _firstLevel: 1.03882
 --- !u!195 &2412930126167099331
 NavMeshAgent:
   m_ObjectHideFlags: 0

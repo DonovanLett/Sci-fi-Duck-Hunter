@@ -1,7 +1,9 @@
+using GameDevHQ.FileBase.Plugins.FPS_Character_Controller;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class RoundManager : MonoBehaviour
 {
@@ -11,6 +13,17 @@ public class RoundManager : MonoBehaviour
     [SerializeField]
     private int _currentRound;
 
+    [SerializeField]
+    private AudioSource _roundMusic;
+
+    [SerializeField]
+    private PlayableDirector _fadeOutTimeline; // End
+
+    [SerializeField]
+    private PlayableDirector _gameOverCutscene;
+
+    private bool _isRoundMusicPlaying = false;
+
     private SpawnManager _spawnManager;
 
     private PointSystem _pointSystem;
@@ -18,6 +31,8 @@ public class RoundManager : MonoBehaviour
     private WorldSpaceUIManager _worldSpaceUI; // UI Code
 
     private ScreenSpaceUIManager _screenSpaceUI;
+
+    private SniperRifle _sniperRifle; // Game Over Code; Originally _playerMovement, and used to control whether or not the player could move
 
     // Singleton
     public static RoundManager Instance;
@@ -51,6 +66,7 @@ public class RoundManager : MonoBehaviour
        // _spawnManager = FindObjectOfType<SpawnManager>();
         _pointSystem = FindObjectOfType<PointSystem>();
         _screenSpaceUI = FindObjectOfType<ScreenSpaceUIManager>(); // UI Code
+        _sniperRifle = FindObjectOfType<SniperRifle>();
     }
 
     // Update is called once per frame
@@ -63,7 +79,7 @@ public class RoundManager : MonoBehaviour
     {
         _spawnManager = FindObjectOfType<SpawnManager>();
         _worldSpaceUI = FindObjectOfType<WorldSpaceUIManager>(); // UI Code
-        _worldSpaceUI.TriggerRoundText(_currentRound, 0); //  UI Code
+       // _worldSpaceUI.TriggerRoundText(_currentRound, 0); //  UI Code
        // _spawnManager.StartRound(_rounds[_currentRound]); // Crossed out for UI Code
     }
 
@@ -72,7 +88,12 @@ public class RoundManager : MonoBehaviour
         _screenSpaceUI.SwitchOffAll(); // UI Code
         if (_currentRound == (_rounds.Length - 1))
         {
-            _pointSystem.FinalizeGameResults();
+
+            //_pointSystem.FinalizeGameResults(); // Cut out for end
+            _sniperRifle.SetCanCollectToFalse();
+            _fadeOutTimeline.Play(); // End
+            _roundMusic.Stop(); // Music Code
+            _isRoundMusicPlaying = false; // Music Code
         }
         else
         {
@@ -82,9 +103,23 @@ public class RoundManager : MonoBehaviour
         }
     }
 
+    public void CurrentRoundFailed()
+    {
+        _screenSpaceUI.SwitchOffAll();
+        _sniperRifle.SetCanCollectToFalse();
+        _roundMusic.Stop();
+        _gameOverCutscene.Play();
+    }
+
     public void TriggerNextRound() // UI Code
     {
         _screenSpaceUI.TriggerSteadyText(); // UI Code
         _spawnManager.StartRound(_rounds[_currentRound]);
+        _screenSpaceUI.RobotNumber(_rounds[_currentRound]); // Ammo/Robot Code
+        if (_isRoundMusicPlaying == false) // Music Code
+        {
+            _roundMusic.Play();
+            _isRoundMusicPlaying = true;
+        }
     }
 }

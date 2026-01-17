@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PointSystem : MonoBehaviour
 {
@@ -21,9 +22,13 @@ public class PointSystem : MonoBehaviour
 
     private List<Duck_AI> _currentDucks;
 
+    private int _numOfLivingDucksInRound; // Ammo/Robot Code
+
     private RoundManager _roundManager; // Round Manager Code
 
     private HeadStartTimer _headStartTimer;
+
+    private ScreenSpaceUIManager _screenSpaceUIManager; // Ammo/Robot Code
 
     [SerializeField]
     private SniperRifle _sniper; // Round Manager Code
@@ -47,11 +52,13 @@ public class PointSystem : MonoBehaviour
     {
         _roundManager = FindObjectOfType<RoundManager>(); // Round Manager Code
         _headStartTimer = FindObjectOfType<HeadStartTimer>(); // Round Manager Code
+        _screenSpaceUIManager = FindObjectOfType<ScreenSpaceUIManager>(); // Ammo/Robot Code
     }
 
     public void SetDucks(List<Duck_AI> ducks)
     {
         _currentDucks = ducks;
+        _numOfLivingDucksInRound = _currentDucks.Count; // Ammo/Robot Code
     }
 
     public void StartTimer()
@@ -94,7 +101,9 @@ public class PointSystem : MonoBehaviour
 
     public void CheckDucks()
     {
-        foreach(var duck in _currentDucks){
+        _numOfLivingDucksInRound--; // Ammo/Robot Code
+        _screenSpaceUIManager.RobotNumber(_numOfLivingDucksInRound); // Ammo/Robot Code
+        foreach (var duck in _currentDucks){
             if (duck.IsDead() == false && duck.IsEscaped() == false)
             {
                 return;
@@ -104,6 +113,7 @@ public class PointSystem : MonoBehaviour
         _sniper.SetCanFireToFalse(); // Round Manager Code
 
         Debug.Log("Round Ended");
+        //_screenSpaceUIManager.SwitchOffAll();
         FinalizeRoundResults(); // Round Manager Code: Originally named FinalizeResults()
     }
 
@@ -124,6 +134,7 @@ public class PointSystem : MonoBehaviour
         }
         else
         {
+            _roundManager.CurrentRoundFailed();
             Debug.Log("Eaten By Ducks");
         }
     }
@@ -131,6 +142,11 @@ public class PointSystem : MonoBehaviour
     public void FinalizeGameResults() // Round Manager Code
     {
         Debug.Log("Final Tally: " + _finalTally);
+    }
+
+    public float FinalTally()
+    {
+        return _finalTally;
     }
 
     // Update is called once per frame
