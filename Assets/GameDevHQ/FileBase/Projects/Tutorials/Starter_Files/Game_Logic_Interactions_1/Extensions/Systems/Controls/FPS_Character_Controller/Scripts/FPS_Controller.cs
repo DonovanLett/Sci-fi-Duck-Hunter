@@ -57,6 +57,7 @@ namespace GameDevHQ.FileBase.Plugins.FPS_Character_Controller
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 Cursor.lockState = CursorLockMode.None;
+                Cursor.lockState = CursorLockMode.Locked;
             }
 
             if (_canMove)
