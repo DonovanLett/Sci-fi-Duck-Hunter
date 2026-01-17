@@ -304,6 +304,8 @@ public class Duck_AI : MonoBehaviour
             _isMakingFinalDash = false; //
             _collider.enabled = false;
             _agent.isStopped = true;
+            _agent.avoidancePriority = 99; // AI
+            _agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance; // AI
             _isHiding = false;
             _isHesitating = false;
             if (_currentState == State.Running)
@@ -339,6 +341,7 @@ public class Duck_AI : MonoBehaviour
         _animator.ResetTrigger("Death");
         gameObject.SetActive(false);
         _collider.enabled = true;
+        _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance; // AI
     }
 
     public bool IsDead()
