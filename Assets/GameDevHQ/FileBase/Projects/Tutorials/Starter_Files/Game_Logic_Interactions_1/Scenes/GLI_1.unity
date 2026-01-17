@@ -22303,13 +22303,13 @@ MonoBehaviour:
   _roundTextGroups:
   - _roundTexts:
     - _pauseBeforeTyping: 1
-      _text: You are the primary Head of Security at the Cannibal Duckie Research
-        Facility in Livingston, Illinois (CDRF for short).
+      _text: You are the primary Head of Security at the Cannibal Robot Research
+        Facility in Livingston, Illinois (CRRF for short).
       _pauseAfterTyping: 5
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 1
-      _text: Each round, escaped cannibal Duckies will be appearing at the top floor
+      _text: Each round, escaped Cannibal Robots will be appearing at the top floor
         of this facility in front of you, attempting to escape down to the Exit on
         the bottom floor, and temporarily hiding behind the large vertical pillars
         that line their trail.
@@ -22332,12 +22332,12 @@ MonoBehaviour:
       _doesWipeText: 0
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 0
-      _text: ', the more points you recieve for the round.'
+      _text: ', the more points you receive for the round.'
       _pauseAfterTyping: 3
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 1
-      _text: One Duck slips by
+      _text: One Robot slips by
       _pauseAfterTyping: 1
       _doesWipeText: 0
       _doesPrintWholeTextImmediately: 0
@@ -22347,7 +22347,7 @@ MonoBehaviour:
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 1
-      _text: There is also a randomized pause between the Ducks beginning to spawn
+      _text: There is also a randomized pause between the Robots beginning to spawn
         in and you being able to fire
       _pauseAfterTyping: 0.5
       _doesWipeText: 0
@@ -22365,17 +22365,17 @@ MonoBehaviour:
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 0
-      _text: 'Utilize this time to gauge where each Duck is hiding, and remember:'
+      _text: 'Utilize this time to gauge where each Robot is hiding, and remember:'
       _pauseAfterTyping: 0.5
       _doesWipeText: 0
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 0
-      _text: ' no hiding spot can hold two Ducks at once.'
+      _text: ' no hiding spot can hold two Robots at once.'
       _pauseAfterTyping: 5
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 0
-      _text: Seven rounds, with an increasing number of Ducks each time.
+      _text: Seven rounds, with an increasing number of Robots each time.
       _pauseAfterTyping: 3
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
