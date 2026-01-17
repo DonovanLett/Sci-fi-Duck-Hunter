@@ -19,6 +19,9 @@ public class RoundManager : MonoBehaviour
     [SerializeField]
     private PlayableDirector _fadeOutTimeline; // End
 
+    [SerializeField]
+    private PlayableDirector _gameOverCutscene;
+
     private bool _isRoundMusicPlaying = false;
 
     private SpawnManager _spawnManager;
@@ -29,7 +32,7 @@ public class RoundManager : MonoBehaviour
 
     private ScreenSpaceUIManager _screenSpaceUI;
 
-    private FPS_Controller _playerBody;
+    private SniperRifle _sniperRifle; // Game Over Code; Originally _playerMovement, and used to control whether or not the player could move
 
     // Singleton
     public static RoundManager Instance;
@@ -63,7 +66,7 @@ public class RoundManager : MonoBehaviour
        // _spawnManager = FindObjectOfType<SpawnManager>();
         _pointSystem = FindObjectOfType<PointSystem>();
         _screenSpaceUI = FindObjectOfType<ScreenSpaceUIManager>(); // UI Code
-        _playerBody = FindObjectOfType<FPS_Controller>();
+        _sniperRifle = FindObjectOfType<SniperRifle>();
     }
 
     // Update is called once per frame
@@ -87,7 +90,7 @@ public class RoundManager : MonoBehaviour
         {
 
             //_pointSystem.FinalizeGameResults(); // Cut out for end
-            _playerBody.DisableMovement();
+            _sniperRifle.SetCanCollectToFalse();
             _fadeOutTimeline.Play(); // End
             _roundMusic.Stop(); // Music Code
             _isRoundMusicPlaying = false; // Music Code
@@ -98,6 +101,14 @@ public class RoundManager : MonoBehaviour
             _worldSpaceUI.TriggerRoundText(_currentRound, points); //  UI Code
            // _spawnManager.StartRound(_rounds[_currentRound]); // Crossed out for UI Code
         }
+    }
+
+    public void CurrentRoundFailed()
+    {
+        _screenSpaceUI.SwitchOffAll();
+        _sniperRifle.SetCanCollectToFalse();
+        _roundMusic.Stop();
+        _gameOverCutscene.Play();
     }
 
     public void TriggerNextRound() // UI Code

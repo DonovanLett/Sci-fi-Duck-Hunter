@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class PointSystem : MonoBehaviour
 {
@@ -112,6 +113,7 @@ public class PointSystem : MonoBehaviour
         _sniper.SetCanFireToFalse(); // Round Manager Code
 
         Debug.Log("Round Ended");
+        //_screenSpaceUIManager.SwitchOffAll();
         FinalizeRoundResults(); // Round Manager Code: Originally named FinalizeResults()
     }
 
@@ -132,6 +134,7 @@ public class PointSystem : MonoBehaviour
         }
         else
         {
+            _roundManager.CurrentRoundFailed();
             Debug.Log("Eaten By Ducks");
         }
     }
