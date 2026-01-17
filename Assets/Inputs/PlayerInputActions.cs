@@ -78,6 +78,34 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UI"",
+            ""id"": ""d879bdc7-4db8-4053-a3a4-ddcf82d2e1ba"",
+            ""actions"": [
+                {
+                    ""name"": ""SkipTutorial"",
+                    ""type"": ""Button"",
+                    ""id"": ""20226536-d6f0-4ccb-b9b9-63f147970599"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""5d2e0413-1bd3-4378-a9fd-10d0e87fdd03"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SkipTutorial"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -88,6 +116,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Collector
         m_Collector = asset.FindActionMap("Collector", throwIfNotFound: true);
         m_Collector_Collect = m_Collector.FindAction("Collect", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_SkipTutorial = m_UI.FindAction("SkipTutorial", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -237,6 +268,52 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     }
     public CollectorActions @Collector => new CollectorActions(this);
+
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_SkipTutorial;
+    public struct UIActions
+    {
+        private @PlayerInputActions m_Wrapper;
+        public UIActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @SkipTutorial => m_Wrapper.m_UI_SkipTutorial;
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
+        public void AddCallbacks(IUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @SkipTutorial.started += instance.OnSkipTutorial;
+            @SkipTutorial.performed += instance.OnSkipTutorial;
+            @SkipTutorial.canceled += instance.OnSkipTutorial;
+        }
+
+        private void UnregisterCallbacks(IUIActions instance)
+        {
+            @SkipTutorial.started -= instance.OnSkipTutorial;
+            @SkipTutorial.performed -= instance.OnSkipTutorial;
+            @SkipTutorial.canceled -= instance.OnSkipTutorial;
+        }
+
+        public void RemoveCallbacks(IUIActions instance)
+        {
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public UIActions @UI => new UIActions(this);
     public interface ISniperRifleActions
     {
         void OnFire(InputAction.CallbackContext context);
@@ -244,5 +321,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface ICollectorActions
     {
         void OnCollect(InputAction.CallbackContext context);
+    }
+    public interface IUIActions
+    {
+        void OnSkipTutorial(InputAction.CallbackContext context);
     }
 }

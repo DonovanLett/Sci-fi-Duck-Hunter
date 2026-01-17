@@ -17,6 +17,10 @@ public class WorldSpaceUIManager : MonoBehaviour
 
     private RoundManager _roundManager;
 
+    private PlayerInputActions _playerInput; // Skip Code
+
+    private bool _isTutorialPlaying; // Skip Code
+
     // Singleton
     public static WorldSpaceUIManager Instance;
 
@@ -34,6 +38,13 @@ public class WorldSpaceUIManager : MonoBehaviour
     void Start()
     {
         _roundManager = FindObjectOfType<RoundManager>();
+    }
+
+    private void OnEnable() // Skip Code
+    {
+        _playerInput = new PlayerInputActions();
+        _playerInput.UI.Enable();
+        _playerInput.UI.SkipTutorial.performed += SkipTutorial;
     }
 
     // Update is called once per frame
@@ -54,6 +65,10 @@ public class WorldSpaceUIManager : MonoBehaviour
 
     IEnumerator RoundText(int round, int points)
     {
+        if(round == 0) 
+        { 
+            _isTutorialPlaying = true; // Skip Code
+        }
         RoundTextGroup currentRound = _roundTextGroups[round];
         for (int i = 0; i < currentRound._roundTexts.Length; i++)
         {
@@ -88,7 +103,22 @@ public class WorldSpaceUIManager : MonoBehaviour
                 _narratorText.text = "";
             }
         }
+        if (round == 0)
+        {
+            _isTutorialPlaying = false; // Skip Code
+        }
         _narratorText.text = "";
         _roundManager.TriggerNextRound();
+    }
+
+    private void SkipTutorial(UnityEngine.InputSystem.InputAction.CallbackContext context) // Skip Code
+    {
+        if (_isTutorialPlaying)
+        {
+            StopAllCoroutines();
+            _isTutorialPlaying = false;
+            _narratorText.text = "";
+            _roundManager.TriggerNextRound();
+        }
     }
 }

@@ -56,6 +56,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "d879bdc7-4db8-4053-a3a4-ddcf82d2e1ba",
+            "actions": [
+                {
+                    "name": "SkipTutorial",
+                    "type": "Button",
+                    "id": "20226536-d6f0-4ccb-b9b9-63f147970599",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "5d2e0413-1bd3-4378-a9fd-10d0e87fdd03",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SkipTutorial",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
