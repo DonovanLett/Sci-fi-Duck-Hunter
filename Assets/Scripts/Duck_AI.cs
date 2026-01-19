@@ -240,12 +240,28 @@ public class Duck_AI : MonoBehaviour
     IEnumerator HidingRoutine()
     {
         _agent.isStopped = true;
-        _agent.avoidancePriority = 0;
+        if(_selectedWaypoints[_currentWaypoint - 1].RequiresGhosting())
+        {
+            _collider.enabled = false; // Ghoster Code
+            _agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance; // Ghoster Code
+            _agent.avoidancePriority = 99; // Ghoster Code / SWITCH BACK TO ZERO
+        }
+        else
+        {
+            _agent.avoidancePriority = 0;
+        }
         float _hidingTime = ((Random.value * (_maxHidingTime - _minHidingTime)) + _minHidingTime);
         yield return new WaitForSeconds(_hidingTime);
         _isHiding = false;
         if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false) // Occupy Code
         { // Occupy Code
+            // Ghoster Code
+            if (_selectedWaypoints[_currentWaypoint - 1].RequiresGhosting())
+            {
+                _collider.enabled = true;
+                _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+            }
+            // Ghoster Code
             _currentState = State.Running;
             if (_animator != null)
             {
@@ -271,6 +287,13 @@ public class Duck_AI : MonoBehaviour
         yield return new WaitForSeconds(_hesitationTime);
         if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false)
         {
+            // Ghoster Code
+            if (_selectedWaypoints[_currentWaypoint - 1].RequiresGhosting())
+            {
+                _collider.enabled = true;
+                _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
+            }
+            // Ghoster Code
             _currentState = State.Running;
             if(_animator != null) { 
                 _animator.SetBool("Hiding", false); // Robot Code

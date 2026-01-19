@@ -10,6 +10,9 @@ public class Waypoint : MonoBehaviour
     [SerializeField] // Unserialize after experimentation
     private bool _isOccupied = false;
 
+    [SerializeField]
+    private bool _requiresGhosting; // Ghoster Code
+
     public bool IsOccupied()
     {
         return _isOccupied;
@@ -32,4 +35,10 @@ public class Waypoint : MonoBehaviour
 
     }
 
+    // Ghoster Code
+    public bool RequiresGhosting()
+    {
+        return _requiresGhosting;
+    }
+    // Ghoster Code
 }

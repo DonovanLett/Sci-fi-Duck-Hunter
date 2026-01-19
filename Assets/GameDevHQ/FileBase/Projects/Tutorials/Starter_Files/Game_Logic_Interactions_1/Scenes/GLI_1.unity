@@ -18244,6 +18244,10 @@ PrefabInstance:
       propertyPath: _isOccupied
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2272816199255597724, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
+      propertyPath: _requiresGhosting
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2639801860220073737, guid: 057dd41e4599c9f4c8e16ed39ef0de65, type: 3}
       propertyPath: m_Name
       value: SF_Waypoint_6
