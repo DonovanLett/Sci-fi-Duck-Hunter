@@ -240,11 +240,11 @@ public class Duck_AI : MonoBehaviour
     IEnumerator HidingRoutine()
     {
         _agent.isStopped = true;
-        if(_selectedWaypoints[_currentWaypoint - 1].RequiresGhosting())
+        if(_selectedWaypoints[_currentWaypoint - 1].IsGhosting())
         {
             _collider.enabled = false; // Ghoster Code
             _agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance; // Ghoster Code
-            _agent.avoidancePriority = 99; // Ghoster Code / SWITCH BACK TO ZERO
+            _agent.avoidancePriority = 99; // Ghoster Code
         }
         else
         {
@@ -256,7 +256,7 @@ public class Duck_AI : MonoBehaviour
         if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false) // Occupy Code
         { // Occupy Code
             // Ghoster Code
-            if (_selectedWaypoints[_currentWaypoint - 1].RequiresGhosting())
+            if (_selectedWaypoints[_currentWaypoint - 1].IsGhosting())
             {
                 _collider.enabled = true;
                 _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
@@ -288,7 +288,7 @@ public class Duck_AI : MonoBehaviour
         if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false)
         {
             // Ghoster Code
-            if (_selectedWaypoints[_currentWaypoint - 1].RequiresGhosting())
+            if (_selectedWaypoints[_currentWaypoint - 1].IsGhosting())
             {
                 _collider.enabled = true;
                 _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;

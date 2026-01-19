@@ -66,6 +66,12 @@ public class SpawnManager : MonoBehaviour
 
     public void StartRound(int duckNumber) // Round Manager Code
     {
+        // Ghoster 2 Code
+        foreach (var point in _columnWaypoints)
+        {
+            point.SetGhosting();
+        }
+        // Ghoster 2 Code
         _numberOfDucks = duckNumber;
         StartCoroutine(SpawnRoutine());
     }
