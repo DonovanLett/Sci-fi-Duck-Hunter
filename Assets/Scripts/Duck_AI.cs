@@ -57,6 +57,20 @@ public class Duck_AI : MonoBehaviour
     [SerializeField]
     private float _firstLevel;
 
+    [Header("Agent Stall Detector")]
+    [SerializeField]
+    private float stallSpeed = 0.05f;
+    [SerializeField]
+    private float stallTime = 0.75f;
+    private float stalledTimer;
+    private Vector3 _stallPosition;
+    private bool _isRecorrectingStall;
+    [SerializeField]
+    private float _sideWaysRecorrectDistance = 2.4f;
+    [SerializeField]
+    private float _backwardsRecorrectDistance = 0.5f;
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -167,6 +181,15 @@ public class Duck_AI : MonoBehaviour
         switch (_currentState)
         {
             case State.Running:
+                // Side Step Code
+                AgentStallDetector();
+                if(transform.position == _stallPosition && _isRecorrectingStall)
+                {
+                    _isRecorrectingStall = false;
+                    _agent.SetDestination(_targetedPosition);
+                    Debug.Log("Robot " + _designatedPriority + " is back on Track");
+                }
+                // Side Step Code
                 //_animator.SetFloat("Speed", _agent.velocity.magnitude); // Robot Code
                 if (transform.position == _targetedPosition)
                 {
@@ -213,6 +236,79 @@ public class Duck_AI : MonoBehaviour
         }
     }
 
+    // Side Step Code
+    private void AgentStallDetector()
+    {
+        if (!_agent.hasPath || _agent.pathPending)
+        {
+            stalledTimer = 0f;
+            return;
+        }
+
+        bool shouldMove = _agent.remainingDistance > _agent.stoppingDistance;
+
+        bool notMoving = _agent.velocity.sqrMagnitude < stallSpeed * stallSpeed;
+
+        if (shouldMove && notMoving)
+        {
+            stalledTimer += Time.deltaTime;
+
+            if (stalledTimer >= stallTime)
+            {
+                stalledTimer = 0;
+                _isRecorrectingStall = true; // Maybe
+                TryLocalSidestep();
+            }
+        }
+        else
+        {
+            stalledTimer = 0f;
+        }
+    }
+
+    private void TryLocalSidestep()
+    {
+        stalledTimer = 0;
+        Vector3 right = transform.right * _sideWaysRecorrectDistance; // Originally .75, then 1.5, 1.75 (3 works really well)
+        Vector3 left = -right;
+
+        Debug.Log("Robot " + _designatedPriority + " is attempting Left");
+        if (TryMove(left)) { return; }
+
+        Debug.Log("Robot " + _designatedPriority + " is attempting Right");
+        if (TryMove(right)) { return; }
+
+        TryBackstep();
+    }
+
+    private bool TryMove(Vector3 offset)
+    {
+        Vector3 target = transform.position + offset;
+
+        if (NavMesh.SamplePosition(target, out var hit, 1f, _agent.areaMask))
+        {
+            _stallPosition = hit.position;
+            _agent.SetDestination(_stallPosition);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void TryBackstep()
+    {
+        Debug.Log("Robot " + _designatedPriority + " is attempting Backstep");
+        Vector3 back = -_agent.transform.forward * _backwardsRecorrectDistance;
+
+        if (NavMesh.SamplePosition(_agent.transform.position + back, out var hit, 1f, _agent.areaMask))
+        {
+            _stallPosition = hit.position;
+            _agent.SetDestination(_stallPosition);
+        }
+    }
+    // Side Step Code
+
+
     private void SelectNewWaypoint()
     {
         _currentWaypoint++;
@@ -240,28 +336,12 @@ public class Duck_AI : MonoBehaviour
     IEnumerator HidingRoutine()
     {
         _agent.isStopped = true;
-        if(_selectedWaypoints[_currentWaypoint - 1].IsGhosting())
-        {
-            _collider.enabled = false; // Ghoster Code
-            _agent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance; // Ghoster Code
-            _agent.avoidancePriority = 99; // Ghoster Code
-        }
-        else
-        {
-            _agent.avoidancePriority = 0;
-        }
+        _agent.avoidancePriority = 0;
         float _hidingTime = ((Random.value * (_maxHidingTime - _minHidingTime)) + _minHidingTime);
         yield return new WaitForSeconds(_hidingTime);
         _isHiding = false;
         if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false) // Occupy Code
         { // Occupy Code
-            // Ghoster Code
-            if (_selectedWaypoints[_currentWaypoint - 1].IsGhosting())
-            {
-                _collider.enabled = true;
-                _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-            }
-            // Ghoster Code
             _currentState = State.Running;
             if (_animator != null)
             {
@@ -287,13 +367,6 @@ public class Duck_AI : MonoBehaviour
         yield return new WaitForSeconds(_hesitationTime);
         if (_selectedWaypoints[_currentWaypoint].IsOccupied() == false)
         {
-            // Ghoster Code
-            if (_selectedWaypoints[_currentWaypoint - 1].IsGhosting())
-            {
-                _collider.enabled = true;
-                _agent.obstacleAvoidanceType = ObstacleAvoidanceType.HighQualityObstacleAvoidance;
-            }
-            // Ghoster Code
             _currentState = State.Running;
             if(_animator != null) { 
                 _animator.SetBool("Hiding", false); // Robot Code
