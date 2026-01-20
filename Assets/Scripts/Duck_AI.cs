@@ -62,8 +62,11 @@ public class Duck_AI : MonoBehaviour
     private float stallSpeed = 0.05f;
     [SerializeField]
     private float stallTime = 0.75f;
+    [SerializeField]
     private float stalledTimer;
+    [SerializeField]
     private Vector3 _stallPosition;
+    [SerializeField]
     private bool _isRecorrectingStall;
     [SerializeField]
     private float _sideWaysRecorrectDistance = 2.4f;
