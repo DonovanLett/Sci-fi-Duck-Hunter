@@ -22400,7 +22400,7 @@ MonoBehaviour:
       _doesWipeText: 0
       _doesPrintWholeTextImmediately: 0
     - _pauseBeforeTyping: 0
-      _text: ' (to prevent puppy guarding the spawn point and what-not).'
+      _text: ' (to prevent puppy guarding the spawn point and whatnot).'
       _pauseAfterTyping: 6
       _doesWipeText: 1
       _doesPrintWholeTextImmediately: 0
