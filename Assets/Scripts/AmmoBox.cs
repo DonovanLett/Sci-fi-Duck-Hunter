@@ -10,7 +10,7 @@ public class AmmoBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Unhighlighted();
     }
 
     public void Highlighted()
