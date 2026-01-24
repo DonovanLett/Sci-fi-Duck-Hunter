@@ -72,12 +72,17 @@ public class Duck_AI : MonoBehaviour
     private float _sideWaysRecorrectDistance = 2.4f;
     [SerializeField]
     private float _backwardsRecorrectDistance = 0.5f;
-    
 
+    [Header("Sound Effects")]
+    [SerializeField]
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _escapeSoundEffect;
 
     // Start is called before the first frame update
     void Start()
     {
+        _audioSource = GetComponent<AudioSource>(); // Escape Code
         _headStartTimer = FindObjectOfType<HeadStartTimer>(); // Timer Code
         _pointSystem = FindObjectOfType<PointSystem>(); // Point Code
         _collider = GetComponent<CapsuleCollider>();
@@ -457,11 +462,37 @@ public class Duck_AI : MonoBehaviour
     {
         // Trigger code to subtract points for when a Duck escapes
         _currentState = State.Escaped;
+        PlayClipWithSourceSettings(_audioSource, _escapeSoundEffect, transform.position); // Escape Code
         _pointSystem.PlayerLost();
         _pointSystem.CheckDucks();
         gameObject.SetActive(false);
         // Destroy(this.gameObject);
     }
 
-        
+    // Extra Code
+    private void PlayClipWithSourceSettings(AudioSource sourceTemplate, AudioClip clip, Vector3 position)
+    {
+        GameObject tempGO = new GameObject("OneShotAudio");
+        tempGO.transform.position = position;
+
+        AudioSource tempSource = tempGO.AddComponent<AudioSource>();
+
+        // Copy settings
+        tempSource.outputAudioMixerGroup = sourceTemplate.outputAudioMixerGroup;
+        tempSource.spatialBlend = sourceTemplate.spatialBlend;
+        tempSource.volume = sourceTemplate.volume;
+        tempSource.pitch = sourceTemplate.pitch;
+        tempSource.rolloffMode = sourceTemplate.rolloffMode;
+        tempSource.minDistance = sourceTemplate.minDistance;
+        tempSource.maxDistance = sourceTemplate.maxDistance;
+        tempSource.dopplerLevel = sourceTemplate.dopplerLevel;
+        tempSource.spread = sourceTemplate.spread;
+
+        tempSource.clip = clip;
+        tempSource.Play();
+
+        Object.Destroy(tempGO, clip.length / tempSource.pitch);
+    }
+    // Extra
+
 }
