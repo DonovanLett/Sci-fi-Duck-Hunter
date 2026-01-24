@@ -77,6 +77,8 @@ public class Duck_AI : MonoBehaviour
     [SerializeField]
     private AudioSource _audioSource;
     [SerializeField]
+    private AudioClip[] _deathSoundEffects;
+    [SerializeField]
     private AudioClip _escapeSoundEffect;
 
     // Start is called before the first frame update
@@ -404,6 +406,10 @@ public class Duck_AI : MonoBehaviour
     {
         if (_currentState != State.Dead)
         {
+            // Extra Code
+            int deathSoundEffectNumber = Random.Range(0, _deathSoundEffects.Length);
+            PlayClipWithSourceSettings(_audioSource, _deathSoundEffects[deathSoundEffectNumber], transform.position);
+            //Extra Code
             StopAllCoroutines();
             _isMakingFinalDash = false; //
             _collider.enabled = false;

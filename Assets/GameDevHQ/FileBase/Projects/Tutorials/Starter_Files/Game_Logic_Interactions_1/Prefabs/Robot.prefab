@@ -5959,6 +5959,14 @@ MonoBehaviour:
   _sideWaysRecorrectDistance: 2.2
   _backwardsRecorrectDistance: 0.5
   _audioSource: {fileID: 0}
+  _deathSoundEffects:
+  - {fileID: 8300000, guid: d8af861f6b7c04b48a4c5d5e4c3a9714, type: 3}
+  - {fileID: 8300000, guid: d385c75ff30254d0d8c8ca319cdac666, type: 3}
+  - {fileID: 8300000, guid: 48ee0e82db3f44332a8c8a443186437e, type: 3}
+  - {fileID: 8300000, guid: 886fe477768794f059109564fad644fe, type: 3}
+  - {fileID: 8300000, guid: a98201cb11202437dbd7f675f78919f7, type: 3}
+  - {fileID: 8300000, guid: 9282452b8098c46649eebfd431d39ac4, type: 3}
+  - {fileID: 8300000, guid: feffe8a1a1c7d469da150a5d751afb59, type: 3}
   _escapeSoundEffect: {fileID: 8300000, guid: a1d4cdd6241e84e439ac4948830fe69b, type: 3}
 --- !u!195 &3526917584827597300
 NavMeshAgent:
