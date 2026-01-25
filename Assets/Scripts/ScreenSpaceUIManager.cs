@@ -100,6 +100,18 @@ public class ScreenSpaceUIManager : MonoBehaviour
         _reloadHolder.SetActive(false);
     }
 
+    public void EnableStats()
+    {
+        _ammoHolder.SetActive(true);
+        _robotHolder.SetActive(true);
+    }
+
+    public void DisableStats()
+    {
+        _ammoHolder.SetActive(false);
+        _robotHolder.SetActive(false);
+    }
+
     public void StartFinalTally()
     {
         _pointSystem = FindObjectOfType<PointSystem>();

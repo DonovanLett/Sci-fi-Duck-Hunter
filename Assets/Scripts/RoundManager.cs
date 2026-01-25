@@ -88,12 +88,12 @@ public class RoundManager : MonoBehaviour
         _screenSpaceUI.SwitchOffAll(); // UI Code
         if (_currentRound == (_rounds.Length - 1))
         {
-
             //_pointSystem.FinalizeGameResults(); // Cut out for end
             _sniperRifle.SetCanCollectToFalse();
             _fadeOutTimeline.Play(); // End
             _roundMusic.Stop(); // Music Code
             _isRoundMusicPlaying = false; // Music Code
+            _screenSpaceUI.DisableStats(); // Extra Code
         }
         else
         {
@@ -105,6 +105,7 @@ public class RoundManager : MonoBehaviour
 
     public void CurrentRoundFailed()
     {
+        _screenSpaceUI.DisableStats(); // Extra Code
         _screenSpaceUI.SwitchOffAll();
         _sniperRifle.SetCanCollectToFalse();
         _roundMusic.Stop();
@@ -113,6 +114,12 @@ public class RoundManager : MonoBehaviour
 
     public void TriggerNextRound() // UI Code
     {
+        // Extra Code
+        if(_currentRound == 0)
+        {
+            _screenSpaceUI.EnableStats();
+        }
+        // Extra Code
         _screenSpaceUI.TriggerSteadyText(); // UI Code
         _spawnManager.StartRound(_rounds[_currentRound]);
         _screenSpaceUI.RobotNumber(_rounds[_currentRound]); // Ammo/Robot Code
