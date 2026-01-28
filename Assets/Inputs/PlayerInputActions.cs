@@ -48,6 +48,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a10321aa-51b9-4703-a6c2-601a4abf78a6"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
