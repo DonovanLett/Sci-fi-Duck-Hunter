@@ -5951,9 +5951,9 @@ MonoBehaviour:
   _targetedPosition: {x: 0, y: 0, z: 0}
   _secondLevel: 3.63882
   _firstLevel: 0.03882
-  stallSpeed: 0.9
-  stallTime: 0.75
-  stalledTimer: 0
+  _stallSpeed: 0.9
+  _stallTime: 0.75
+  _stalledTimer: 0
   _stallPosition: {x: 0, y: 0, z: 0}
   _isRecorrectingStall: 0
   _sideWaysRecorrectDistance: 2.2

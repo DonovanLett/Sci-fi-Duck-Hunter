@@ -33,7 +33,7 @@ public class SniperRifle : MonoBehaviour
     [SerializeField]
     private ParticleSystem _bulletSpark, _muzzleFlash;
 
-    private bool wasHittingLastFrame = false;
+    private bool _wasHittingLastFrame = false;
 
     private ScreenSpaceUIManager _screenSpaceUIManager; // UI Code
 
@@ -164,7 +164,7 @@ public class SniperRifle : MonoBehaviour
             isHittingThisFrame = false;
         }
 
-        if (isHittingThisFrame && !wasHittingLastFrame)
+        if (isHittingThisFrame && !_wasHittingLastFrame)
         {
             AmmoBox _ammoBoxScript = hitInfo.collider.GetComponent<AmmoBox>();
             if (hitInfo.collider.tag == "AmmoBox" && _ammoBoxScript != null)
@@ -175,7 +175,7 @@ public class SniperRifle : MonoBehaviour
         }
 
         // EXIT: was hitting, but no longer is
-        if (wasHittingLastFrame && !isHittingThisFrame)
+        if (_wasHittingLastFrame && !isHittingThisFrame)
         {
             AmmoBox _ammoBoxScript = _highLightedGameObject.GetComponent<AmmoBox>();
             if (_highLightedGameObject.tag == "AmmoBox" && _ammoBoxScript != null)
@@ -185,7 +185,7 @@ public class SniperRifle : MonoBehaviour
             }
         }
 
-        wasHittingLastFrame = isHittingThisFrame;
+        _wasHittingLastFrame = isHittingThisFrame;
     }
 
     private void OnDisable()

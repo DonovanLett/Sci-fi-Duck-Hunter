@@ -59,11 +59,11 @@ public class Duck_AI : MonoBehaviour
 
     [Header("Agent Stall Detector")]
     [SerializeField]
-    private float stallSpeed = 0.05f;
+    private float _stallSpeed;
     [SerializeField]
-    private float stallTime = 0.75f;
+    private float _stallTime;
     [SerializeField]
-    private float stalledTimer;
+    private float _stalledTimer;
     [SerializeField]
     private Vector3 _stallPosition;
     [SerializeField]
@@ -251,34 +251,34 @@ public class Duck_AI : MonoBehaviour
     {
         if (!_agent.hasPath || _agent.pathPending)
         {
-            stalledTimer = 0f;
+            _stalledTimer = 0f;
             return;
         }
 
         bool shouldMove = _agent.remainingDistance > _agent.stoppingDistance;
 
-        bool notMoving = _agent.velocity.sqrMagnitude < stallSpeed * stallSpeed;
+        bool notMoving = _agent.velocity.sqrMagnitude < _stallSpeed * _stallSpeed;
 
         if (shouldMove && notMoving)
         {
-            stalledTimer += Time.deltaTime;
+            _stalledTimer += Time.deltaTime;
 
-            if (stalledTimer >= stallTime)
+            if (_stalledTimer >= _stallTime)
             {
-                stalledTimer = 0;
+                _stalledTimer = 0;
                 _isRecorrectingStall = true; // Maybe
                 TryLocalSidestep();
             }
         }
         else
         {
-            stalledTimer = 0f;
+            _stalledTimer = 0f;
         }
     }
 
     private void TryLocalSidestep()
     {
-        stalledTimer = 0;
+        _stalledTimer = 0;
         Vector3 right = transform.right * _sideWaysRecorrectDistance; // Originally .75, then 1.5, 1.75 (3 works really well)
         Vector3 left = -right;
 
